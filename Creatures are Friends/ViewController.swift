@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBAction func btnStart(sender: AnyObject) {
+    }
                             
     override func viewDidLoad() {
         super.viewDidLoad()
