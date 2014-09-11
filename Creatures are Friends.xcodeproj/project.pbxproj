@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2610CC0619C227A4009E7B64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC0519C227A4009E7B64 /* AppDelegate.swift */; };
+		2610CC0819C227A4009E7B64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC0719C227A4009E7B64 /* ViewController.swift */; };
+		2610CC0B19C227A4009E7B64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2610CC0919C227A4009E7B64 /* Main.storyboard */; };
+		2610CC0D19C227A4009E7B64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2610CC0C19C227A4009E7B64 /* Images.xcassets */; };
+		2610CC1919C227A4009E7B64 /* Creatures_are_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC1819C227A4009E7B64 /* Creatures_are_FriendsTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2610CC1319C227A4009E7B64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2610CBF819C227A4009E7B64 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2610CBFF19C227A4009E7B64;
+			remoteInfo = "Creatures are Friends";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2610CC0019C227A4009E7B64 /* Creatures are Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creatures are Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2610CC0419C227A4009E7B64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2610CC0519C227A4009E7B64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2610CC0719C227A4009E7B64 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2610CC0A19C227A4009E7B64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2610CC0C19C227A4009E7B64 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2610CC1219C227A4009E7B64 /* Creatures are FriendsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Creatures are FriendsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2610CC1719C227A4009E7B64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2610CC1819C227A4009E7B64 /* Creatures_are_FriendsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creatures_are_FriendsTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2610CBFD19C227A4009E7B64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2610CC0F19C227A4009E7B64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2610CBF719C227A4009E7B64 = {
+			isa = PBXGroup;
+			children = (
+				2610CC0219C227A4009E7B64 /* Creatures are Friends */,
+				2610CC1519C227A4009E7B64 /* Creatures are FriendsTests */,
+				2610CC0119C227A4009E7B64 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2610CC0119C227A4009E7B64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2610CC0019C227A4009E7B64 /* Creatures are Friends.app */,
+				2610CC1219C227A4009E7B64 /* Creatures are FriendsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2610CC0219C227A4009E7B64 /* Creatures are Friends */ = {
+			isa = PBXGroup;
+			children = (
+				2610CC0519C227A4009E7B64 /* AppDelegate.swift */,
+				2610CC0719C227A4009E7B64 /* ViewController.swift */,
+				2610CC0919C227A4009E7B64 /* Main.storyboard */,
+				2610CC0C19C227A4009E7B64 /* Images.xcassets */,
+				2610CC0319C227A4009E7B64 /* Supporting Files */,
+			);
+			path = "Creatures are Friends";
+			sourceTree = "<group>";
+		};
+		2610CC0319C227A4009E7B64 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2610CC0419C227A4009E7B64 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2610CC1519C227A4009E7B64 /* Creatures are FriendsTests */ = {
+			isa = PBXGroup;
+			children = (
+				2610CC1819C227A4009E7B64 /* Creatures_are_FriendsTests.swift */,
+				2610CC1619C227A4009E7B64 /* Supporting Files */,
+			);
+			path = "Creatures are FriendsTests";
+			sourceTree = "<group>";
+		};
+		2610CC1619C227A4009E7B64 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2610CC1719C227A4009E7B64 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2610CBFF19C227A4009E7B64 /* Creatures are Friends */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2610CC1C19C227A4009E7B64 /* Build configuration list for PBXNativeTarget "Creatures are Friends" */;
+			buildPhases = (
+				2610CBFC19C227A4009E7B64 /* Sources */,
+				2610CBFD19C227A4009E7B64 /* Frameworks */,
+				2610CBFE19C227A4009E7B64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Creatures are Friends";
+			productName = "Creatures are Friends";
+			productReference = 2610CC0019C227A4009E7B64 /* Creatures are Friends.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2610CC1119C227A4009E7B64 /* Creatures are FriendsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2610CC1F19C227A4009E7B64 /* Build configuration list for PBXNativeTarget "Creatures are FriendsTests" */;
+			buildPhases = (
+				2610CC0E19C227A4009E7B64 /* Sources */,
+				2610CC0F19C227A4009E7B64 /* Frameworks */,
+				2610CC1019C227A4009E7B64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2610CC1419C227A4009E7B64 /* PBXTargetDependency */,
+			);
+			name = "Creatures are FriendsTests";
+			productName = "Creatures are FriendsTests";
+			productReference = 2610CC1219C227A4009E7B64 /* Creatures are FriendsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2610CBF819C227A4009E7B64 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Sarah Kuehnle";
+				TargetAttributes = {
+					2610CBFF19C227A4009E7B64 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					2610CC1119C227A4009E7B64 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 2610CBFF19C227A4009E7B64;
+					};
+				};
+			};
+			buildConfigurationList = 2610CBFB19C227A4009E7B64 /* Build configuration list for PBXProject "Creatures are Friends" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2610CBF719C227A4009E7B64;
+			productRefGroup = 2610CC0119C227A4009E7B64 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2610CBFF19C227A4009E7B64 /* Creatures are Friends */,
+				2610CC1119C227A4009E7B64 /* Creatures are FriendsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2610CBFE19C227A4009E7B64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2610CC0B19C227A4009E7B64 /* Main.storyboard in Resources */,
+				2610CC0D19C227A4009E7B64 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2610CC1019C227A4009E7B64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2610CBFC19C227A4009E7B64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2610CC0819C227A4009E7B64 /* ViewController.swift in Sources */,
+				2610CC0619C227A4009E7B64 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2610CC0E19C227A4009E7B64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2610CC1919C227A4009E7B64 /* Creatures_are_FriendsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2610CC1419C227A4009E7B64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2610CBFF19C227A4009E7B64 /* Creatures are Friends */;
+			targetProxy = 2610CC1319C227A4009E7B64 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2610CC0919C227A4009E7B64 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2610CC0A19C227A4009E7B64 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2610CC1A19C227A4009E7B64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2610CC1B19C227A4009E7B64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2610CC1D19C227A4009E7B64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "Creatures are Friends/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2610CC1E19C227A4009E7B64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "Creatures are Friends/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2610CC2019C227A4009E7B64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Creatures are FriendsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Creatures are Friends.app/Creatures are Friends";
+			};
+			name = Debug;
+		};
+		2610CC2119C227A4009E7B64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Creatures are FriendsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Creatures are Friends.app/Creatures are Friends";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2610CBFB19C227A4009E7B64 /* Build configuration list for PBXProject "Creatures are Friends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2610CC1A19C227A4009E7B64 /* Debug */,
+				2610CC1B19C227A4009E7B64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2610CC1C19C227A4009E7B64 /* Build configuration list for PBXNativeTarget "Creatures are Friends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2610CC1D19C227A4009E7B64 /* Debug */,
+				2610CC1E19C227A4009E7B64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2610CC1F19C227A4009E7B64 /* Build configuration list for PBXNativeTarget "Creatures are FriendsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2610CC2019C227A4009E7B64 /* Debug */,
+				2610CC2119C227A4009E7B64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2610CBF819C227A4009E7B64 /* Project object */;
+}
