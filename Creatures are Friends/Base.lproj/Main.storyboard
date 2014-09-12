@@ -41,7 +41,7 @@
         <!--Photo Library-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="PhotoLibrary" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="PhotoGallery" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -60,7 +60,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="Oou-sW-vc4" userLabel="photoCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="Oou-sW-vc4" userLabel="photoCell" customClass="PhotoThumb" customModule="Creatures_are_Friends" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -75,10 +75,15 @@
                                         </view>
                                         <size key="customSize" width="105" height="105"/>
                                         <connections>
+                                            <outlet property="imgView" destination="lud-Ez-9kO" id="oFg-OZ-SM3"/>
                                             <segue destination="JLj-e0-ZSU" kind="show" id="eAm-1f-AEo"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="bTt-ru-8wA"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="BbW-ZQ-HVd"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -139,7 +144,7 @@
                     <navigationItem key="navigationItem" title="Full-Size Image" id="rZg-6j-sec">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="RtS-jj-bDS">
                             <connections>
-                                <action selector="btnAction:" destination="JLj-e0-ZSU" id="UhG-ks-Cuq"/>
+                                <action selector="btnCancel:" destination="JLj-e0-ZSU" id="VcE-wH-qHG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

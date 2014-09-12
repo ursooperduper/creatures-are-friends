@@ -10,19 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // Eventually, this is where the title screen graphics should go
+    // For now, this is just friction and a way for me to figure out intro screens.
+    
     @IBAction func btnStart(sender: AnyObject) {
+        println("Getting started pressed!")
     }
                             
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
 }
 
