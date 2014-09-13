@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2610CC0619C227A4009E7B64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC0519C227A4009E7B64 /* AppDelegate.swift */; };
-		2610CC0819C227A4009E7B64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC0719C227A4009E7B64 /* ViewController.swift */; };
 		2610CC0B19C227A4009E7B64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2610CC0919C227A4009E7B64 /* Main.storyboard */; };
 		2610CC0D19C227A4009E7B64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2610CC0C19C227A4009E7B64 /* Images.xcassets */; };
 		2610CC1919C227A4009E7B64 /* Creatures_are_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC1819C227A4009E7B64 /* Creatures_are_FriendsTests.swift */; };
@@ -32,7 +31,6 @@
 		2610CC0019C227A4009E7B64 /* Creatures are Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creatures are Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2610CC0419C227A4009E7B64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2610CC0519C227A4009E7B64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; usesTabs = 0; };
-		2610CC0719C227A4009E7B64 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2610CC0A19C227A4009E7B64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2610CC0C19C227A4009E7B64 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2610CC1219C227A4009E7B64 /* Creatures are FriendsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Creatures are FriendsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				2610CC0519C227A4009E7B64 /* AppDelegate.swift */,
-				2610CC0719C227A4009E7B64 /* ViewController.swift */,
 				2610CC0919C227A4009E7B64 /* Main.storyboard */,
 				2610CC2C19C23030009E7B64 /* PhotoGallery.swift */,
 				2610CC2E19C23050009E7B64 /* PhotoEdit.swift */,
@@ -225,7 +222,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2610CC0819C227A4009E7B64 /* ViewController.swift in Sources */,
 				2610CC2D19C23030009E7B64 /* PhotoGallery.swift in Sources */,
 				2610CC3119C230BC009E7B64 /* PhotoThumb.swift in Sources */,
 				2610CC2F19C23050009E7B64 /* PhotoEdit.swift in Sources */,
