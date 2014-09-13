@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jmi-8u-R7S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="quj-rS-nbq">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
@@ -96,7 +96,7 @@
         <!--Full-Size Image-->
         <scene sceneID="ggJ-nE-8UN">
             <objects>
-                <viewController id="JLj-e0-ZSU" customClass="PhotoEdit" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="JLj-e0-ZSU" customClass="PhotoEdit" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pyy-du-Nff"/>
                         <viewControllerLayoutGuide type="bottom" id="IxZ-Ry-3cE"/>
@@ -162,6 +162,46 @@
             </objects>
             <point key="canvasLocation" x="1051" y="336"/>
         </scene>
+        <!--Launch Screen-->
+        <scene sceneID="Dfm-h8-3tO">
+            <objects>
+                <viewController id="quj-rS-nbq" customClass="LaunchScreen" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="scw-KO-dXL"/>
+                        <viewControllerLayoutGuide type="bottom" id="izl-1y-obc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MQ4-Nw-5Gu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="7ZY-O2-8de">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="er6-4p-k0d">
+                                <rect key="frame" x="69" y="298" width="163" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Get Started">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="jmi-8u-R7S" kind="show" id="XH7-q7-wc8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="7ZY-O2-8de" secondAttribute="centerX" id="2v6-Zn-cGA"/>
+                            <constraint firstItem="7ZY-O2-8de" firstAttribute="width" secondItem="MQ4-Nw-5Gu" secondAttribute="width" id="58w-bU-0sr"/>
+                            <constraint firstAttribute="centerY" secondItem="7ZY-O2-8de" secondAttribute="centerY" id="E1L-5H-tcT"/>
+                            <constraint firstItem="7ZY-O2-8de" firstAttribute="height" secondItem="MQ4-Nw-5Gu" secondAttribute="height" id="bTb-Ud-IqQ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P4X-P2-55c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-373" y="336"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="6xS-uY-MRW">
             <objects>
@@ -183,10 +223,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6s9-eC-8rj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-347" y="336"/>
+            <point key="canvasLocation" x="352" y="-476"/>
         </scene>
     </scenes>
     <resources>
         <image name="head_1" width="334" height="420"/>
+        <image name="title" width="640" height="1136"/>
     </resources>
 </document>

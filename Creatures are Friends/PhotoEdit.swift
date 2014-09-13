@@ -68,18 +68,6 @@ class PhotoEdit: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    //    @IBOutlet var gestureSwipeRight: UISwipeGestureRecognizer!
-    //
-    //    @IBAction func gestureShowCreature(recognizer: UISwipeGestureRecognizer) {
-    //        println("Detected Right Swipe!")
-    //
-    //
-    //        //var location = recognizer.locationInView(view)
-    //
-    //        imgCharacter1.hidden = false
-    //
-    //
-    //    }
     
     @IBOutlet var gestureDoubleTap: UITapGestureRecognizer!
     @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
@@ -87,15 +75,12 @@ class PhotoEdit: UIViewController {
         
         imgCharacter1.hidden = false
         imgCharacter1.center = location
-        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //view.addGestureRecognizer(gestureSwipeRight)
-        
+    
         view.addGestureRecognizer(gestureDoubleTap)
     }
     
