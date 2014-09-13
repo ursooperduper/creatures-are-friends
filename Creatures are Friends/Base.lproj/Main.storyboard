@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pnA-df-08d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jmi-8u-R7S">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
-        <!--Launch Screen-->
-        <scene sceneID="edi-pZ-exb">
-            <objects>
-                <viewController id="pnA-df-08d" userLabel="Launch Screen" customClass="ViewController" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DRU-Q6-Qft"/>
-                        <viewControllerLayoutGuide type="bottom" id="ESW-ka-Png"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IeS-Ny-Wlb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4p-da-f2n">
-                                <rect key="frame" x="260" y="447" width="80" height="30"/>
-                                <state key="normal" title="Get Started">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnStart:" destination="pnA-df-08d" eventType="touchUpInside" id="x2t-0P-czl"/>
-                                    <segue destination="jmi-8u-R7S" kind="show" id="K75-qp-eId"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ESW-ka-Png" firstAttribute="top" secondItem="H4p-da-f2n" secondAttribute="bottom" constant="123" id="0Wv-Ls-F1M"/>
-                            <constraint firstAttribute="centerX" secondItem="H4p-da-f2n" secondAttribute="centerX" id="3tB-h6-hkf"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Luc-fV-JbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-408" y="337"/>
-        </scene>
         <!--Photo Library-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -149,7 +115,7 @@
                                     <outletCollection property="gestureRecognizers" destination="EOm-Eh-6zT" appends="YES" id="t6G-Ua-sOV"/>
                                 </connections>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="XWz-T2-vQX">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head_1" translatesAutoresizingMaskIntoConstraints="NO" id="XWz-T2-vQX">
                                 <rect key="frame" x="168" y="125" width="265" height="334"/>
                             </imageView>
                         </subviews>
@@ -217,10 +183,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6s9-eC-8rj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="-425"/>
+            <point key="canvasLocation" x="-347" y="336"/>
         </scene>
     </scenes>
     <resources>
-        <image name="head_1.png" width="265" height="334"/>
+        <image name="head_1" width="334" height="420"/>
     </resources>
 </document>
