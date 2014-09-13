@@ -16,7 +16,10 @@ class PhotoEdit: UIViewController {
     var index: Int = 0
     
     @IBOutlet var imgView: UIImageView!
-
+    
+    @IBOutlet var imgCharacter1: UIImageView!
+    
+    
     // Button Actions
     @IBAction func btnCancel(sender: AnyObject) {
         println("Cancel")
@@ -65,17 +68,42 @@ class PhotoEdit: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    //    @IBOutlet var gestureSwipeRight: UISwipeGestureRecognizer!
+    //
+    //    @IBAction func gestureShowCreature(recognizer: UISwipeGestureRecognizer) {
+    //        println("Detected Right Swipe!")
+    //
+    //
+    //        //var location = recognizer.locationInView(view)
+    //
+    //        imgCharacter1.hidden = false
+    //
+    //
+    //    }
+    
+    @IBOutlet var gestureDoubleTap: UITapGestureRecognizer!
+    @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
+        var location = recognizer.locationInView(view)
+        
+        imgCharacter1.hidden = false
+        imgCharacter1.center = location
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //view.addGestureRecognizer(gestureSwipeRight)
+        
+        view.addGestureRecognizer(gestureDoubleTap)
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController.hidesBarsOnTap = true
+        self.navigationController.hidesBarsOnSwipe = true
         self.displayPhoto()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

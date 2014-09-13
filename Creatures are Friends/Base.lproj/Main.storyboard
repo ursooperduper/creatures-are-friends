@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Luc-fV-JbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-357" y="337"/>
+            <point key="canvasLocation" x="-408" y="337"/>
         </scene>
         <!--Photo Library-->
         <scene sceneID="ufC-wZ-h7g">
@@ -50,36 +50,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WR2-ls-ga9">
+                            <collectionView clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WR2-ls-ga9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jaC-yR-ByE">
-                                    <size key="itemSize" width="105" height="105"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="obS-kM-zui">
+                                    <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="Oou-sW-vc4" userLabel="photoCell" customClass="PhotoThumb" customModule="Creatures_are_Friends" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="photoCell" id="Oou-sW-vc4" userLabel="photoCell" customClass="PhotoThumb" customModule="Creatures_are_Friends" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lud-Ez-9kO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lud-Ez-9kO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <size key="customSize" width="105" height="105"/>
+                                        <size key="customSize" width="100" height="100"/>
                                         <connections>
                                             <outlet property="imgView" destination="lud-Ez-9kO" id="oFg-OZ-SM3"/>
-                                            <segue destination="JLj-e0-ZSU" kind="show" id="eAm-1f-AEo"/>
+                                            <segue destination="JLj-e0-ZSU" kind="show" identifier="viewLargePhoto" id="eAm-1f-AEo"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="bTt-ru-8wA"/>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="BbW-ZQ-HVd"/>
@@ -87,6 +98,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WR2-ls-ga9" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="2td-lv-cDV"/>
+                            <constraint firstAttribute="centerY" secondItem="WR2-ls-ga9" secondAttribute="centerY" id="XLA-nu-MiO"/>
+                            <constraint firstAttribute="centerX" secondItem="WR2-ls-ga9" secondAttribute="centerX" id="ZeX-Dd-aal"/>
+                            <constraint firstItem="WR2-ls-ga9" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" id="mY7-Kb-BS9"/>
+                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem systemItem="organize" id="EKR-yF-TzN">
@@ -108,7 +125,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="337"/>
+            <point key="canvasLocation" x="352" y="336"/>
         </scene>
         <!--Full-Size Image-->
         <scene sceneID="ggJ-nE-8UN">
@@ -118,15 +135,31 @@
                         <viewControllerLayoutGuide type="top" id="pyy-du-Nff"/>
                         <viewControllerLayoutGuide type="bottom" id="IxZ-Ry-3cE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lbm-Dj-JAt">
+                    <view key="view" contentMode="scaleAspectFill" id="lbm-Dj-JAt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTX-n2-WIw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BTX-n2-WIw">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <gestureRecognizers/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="EOm-Eh-6zT" appends="YES" id="t6G-Ua-sOV"/>
+                                </connections>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="XWz-T2-vQX">
+                                <rect key="frame" x="168" y="125" width="265" height="334"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="BTX-n2-WIw" secondAttribute="centerX" id="183-Ow-N7O"/>
+                            <constraint firstAttribute="centerY" secondItem="BTX-n2-WIw" secondAttribute="centerY" id="F81-El-Lvj"/>
+                            <constraint firstItem="BTX-n2-WIw" firstAttribute="width" secondItem="lbm-Dj-JAt" secondAttribute="width" id="Vdw-dT-tvs"/>
+                            <constraint firstItem="BTX-n2-WIw" firstAttribute="height" secondItem="lbm-Dj-JAt" secondAttribute="height" id="h4T-FY-ZLW"/>
+                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem systemItem="action" id="sht-0i-klP">
@@ -134,7 +167,7 @@
                                 <action selector="btnExport:" destination="JLj-e0-ZSU" id="TcU-Tr-Cno"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem width="321" style="plain" systemItem="fixedSpace" id="3Wn-p1-s0p"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="3Wn-p1-s0p"/>
                         <barButtonItem systemItem="trash" id="McM-dJ-Up8">
                             <connections>
                                 <action selector="btnDelete:" destination="JLj-e0-ZSU" id="WFc-bF-h1I"/>
@@ -149,18 +182,27 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="gestureDoubleTap" destination="EOm-Eh-6zT" id="fUb-Rp-IP2"/>
+                        <outlet property="imgCharacter1" destination="XWz-T2-vQX" id="Tlb-p0-fYF"/>
                         <outlet property="imgView" destination="BTX-n2-WIw" id="uey-CQ-Vlr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OTj-Sl-KaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="EOm-Eh-6zT">
+                    <connections>
+                        <action selector="handleGestureDoubleTap:" destination="JLj-e0-ZSU" id="z2F-2w-pDL"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1052" y="337"/>
+            <point key="canvasLocation" x="1051" y="336"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6xS-uY-MRW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="jmi-8u-R7S" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="u3w-n8-qzC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -178,4 +220,7 @@
             <point key="canvasLocation" x="353" y="-425"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="head_1.png" width="265" height="334"/>
+    </resources>
 </document>
