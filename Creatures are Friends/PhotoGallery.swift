@@ -12,7 +12,6 @@ import Photos
 let reuseIdentifier = "photoCell"
 let albumName = "Creatures are Friends"
 
-
 class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var albumFound: Bool = false            // Set when we do a check for the Photo Gallery album name
@@ -51,7 +50,6 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     @IBOutlet var collectionView: UICollectionView!
     
-    
     // View management methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,10 +87,10 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         self.photos = PHAsset.fetchAssetsInAssetCollection(self.assetCollection, options: nil)
         //!!Handle the case where no photos are loaded
         // Add a label that says, "No Photos", perhaps
-        if galleryLoaded == false {
+        //if galleryLoaded == false {
             self.collectionView.reloadData()
-            galleryLoaded = true
-        }
+        //    galleryLoaded = true
+        //}
     }
     
     override func didReceiveMemoryWarning() {

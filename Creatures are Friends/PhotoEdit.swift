@@ -9,84 +9,97 @@
 import UIKit
 import Photos
 
-class PhotoEdit: UIViewController {
+class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     
     var assetCollection: PHAssetCollection!
     var photos: PHFetchResult!
     var index: Int = 0
     
     @IBOutlet var imgView: UIImageView!
-    
     @IBOutlet var imgCharacter1: UIImageView!
+    let characterCount = 20
     
+    var imgLocationSet: CGPoint!
+    
+    func randomInt(min: Int, max: Int) -> Int {
+        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    }
     
     // Button Actions
     @IBAction func btnCancel(sender: AnyObject) {
-        println("Cancel")
         self.navigationController.popToRootViewControllerAnimated(true)
     }
     @IBAction func btnExport(sender: AnyObject) {
-        println("Export")
+        println("Save Image")
         // Save and share should probably go here
     }
-    @IBAction func btnDelete(sender: AnyObject) {
-        println("Trash")
-        
-        let alert = UIAlertController(title: "Delete Image", message: "Are you sure you want to delete this image?", preferredStyle: .Alert)
-        
-        // Action: Yes -- User wants to delete the photo
-        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(alertAction) in
-            // Delete the photo
-            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-                let request = PHAssetCollectionChangeRequest(forAssetCollection: self.assetCollection)
-                request.removeAssets([self.photos[self.index]])
-                }, completionHandler: {(success, error) in
-                    NSLog("\nDeleted image -. %@", (success ? "Success" : "Error!" ))
-                    alert.dismissViewControllerAnimated(true, completion: nil)
-                    
-                    self.photos = PHAsset.fetchAssetsInAssetCollection(self.assetCollection, options: nil)
-                    if self.photos.count == 0 {
-                        self.imgView.image == nil
-                        println("No images left!")
-                        //!! Pop to the root view controller
-                    }
-                    
-                    // The user deleted the last photo, so set the index to the last photo now
-                    if self.index >= self.photos.count {
-                        self.index = self.photos.count - 1
-                    }
-                    self.displayPhoto()
-            })
-        }))
-        
-        // Action: No -- User doesn't want to delete the photo
-        alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: {(alertAction) in
-            // don't delete the photo
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
     
     @IBOutlet var gestureDoubleTap: UITapGestureRecognizer!
     @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
-        var location = recognizer.locationInView(view)
+        var location = recognizer.locationInView(self.view)
+        imgLocationSet = location
         
         imgCharacter1.hidden = false
         imgCharacter1.center = location
+        println("IMAGE LOCATION: \(location)")
+        
+        var character = UIImage(named: "head_" + String(randomInt(1, max: 20)))
+        imgCharacter1.image = character
+        
+        imgCharacter1.removeGestureRecognizer(gestureDoubleTap)
+    }
+
+    // Allow the user to drag the character around the screen.
+    @IBOutlet var gesturePanCharacter: UIPanGestureRecognizer!
+    @IBAction func handleGesturePanCharacter(recognizer: UIPanGestureRecognizer) {
+        let translation = recognizer.translationInView(self.view)
+        recognizer.view!.center = CGPoint(x:recognizer.view!.center.x + translation.x,
+            y:recognizer.view!.center.y + translation.y)
+        recognizer.setTranslation(CGPointZero, inView: self.view)
     }
     
+    // All the user to pinch the character to scale and size it
+    @IBOutlet var gesturePinchCharacter: UIPinchGestureRecognizer!
+    @IBAction func handleGesturePinchCharacter(recognizer: UIPinchGestureRecognizer) {
+        recognizer.view!.transform = CGAffineTransformScale(recognizer.view!.transform, recognizer.scale, recognizer.scale)
+        recognizer.scale = 1
+    }
+    
+    // Allow the user to rotate the character
+    @IBOutlet var gestureRotateCharacter: UIRotationGestureRecognizer!
+    @IBAction func handleGestureRotateCharacter(recognizer: UIRotationGestureRecognizer) {
+        recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
+        recognizer.rotation = 0
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         view.addGestureRecognizer(gestureDoubleTap)
+        imgCharacter1.addGestureRecognizer(gesturePanCharacter)
+        imgCharacter1.addGestureRecognizer(gesturePinchCharacter)
+        imgCharacter1.addGestureRecognizer(gestureRotateCharacter)
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController.hidesBarsOnSwipe = true
+        self.navigationController.setToolbarHidden(false, animated: false)
         self.displayPhoto()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController.setToolbarHidden(false, animated: false)
+        self.becomeFirstResponder()
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent!) {
+        if(event.subtype == UIEventSubtype.MotionShake) {
+            var character = UIImage(named: "head_" + String(randomInt(1, max: characterCount)))
+            imgCharacter1.image = character
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,11 +107,15 @@ class PhotoEdit: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     func displayPhoto() {
         let imageManager = PHImageManager.defaultManager()
         var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: PHImageManagerMaximumSize, contentMode: .AspectFit, options: nil, resultHandler: {(result, info) in
             self.imgView.image = result
         })
+    }
+    
+    // Implement gesture delegate recognizer optional function to allow the user to perform multiple gesturesx
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
+        return true
     }
 }

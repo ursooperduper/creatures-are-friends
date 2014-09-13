@@ -93,7 +93,7 @@
             </objects>
             <point key="canvasLocation" x="352" y="336"/>
         </scene>
-        <!--Full-Size Image-->
+        <!--Photo Edit-->
         <scene sceneID="ggJ-nE-8UN">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="JLj-e0-ZSU" customClass="PhotoEdit" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
@@ -106,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BTX-n2-WIw">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                                 <gestureRecognizers/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
@@ -115,16 +115,22 @@
                                     <outletCollection property="gestureRecognizers" destination="EOm-Eh-6zT" appends="YES" id="t6G-Ua-sOV"/>
                                 </connections>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head_1" translatesAutoresizingMaskIntoConstraints="NO" id="XWz-T2-vQX">
-                                <rect key="frame" x="168" y="125" width="265" height="334"/>
+                            <imageView hidden="YES" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head_1" translatesAutoresizingMaskIntoConstraints="NO" id="XWz-T2-vQX">
+                                <rect key="frame" x="0.0" y="64" width="265" height="334"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="klK-Be-csZ" appends="YES" id="20J-xs-9DJ"/>
+                                    <outletCollection property="gestureRecognizers" destination="bcg-Lf-5hF" appends="YES" id="Frd-jA-T5e"/>
+                                    <outletCollection property="gestureRecognizers" destination="mb6-hv-wtv" appends="YES" id="sWo-Mb-Tjh"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="BTX-n2-WIw" secondAttribute="centerX" id="183-Ow-N7O"/>
-                            <constraint firstAttribute="centerY" secondItem="BTX-n2-WIw" secondAttribute="centerY" id="F81-El-Lvj"/>
+                            <constraint firstAttribute="centerY" secondItem="BTX-n2-WIw" secondAttribute="centerY" constant="-10" id="F81-El-Lvj"/>
                             <constraint firstItem="BTX-n2-WIw" firstAttribute="width" secondItem="lbm-Dj-JAt" secondAttribute="width" id="Vdw-dT-tvs"/>
-                            <constraint firstItem="BTX-n2-WIw" firstAttribute="height" secondItem="lbm-Dj-JAt" secondAttribute="height" id="h4T-FY-ZLW"/>
+                            <constraint firstItem="BTX-n2-WIw" firstAttribute="height" secondItem="lbm-Dj-JAt" secondAttribute="height" constant="-108" id="h4T-FY-ZLW"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -133,14 +139,8 @@
                                 <action selector="btnExport:" destination="JLj-e0-ZSU" id="TcU-Tr-Cno"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="3Wn-p1-s0p"/>
-                        <barButtonItem systemItem="trash" id="McM-dJ-Up8">
-                            <connections>
-                                <action selector="btnDelete:" destination="JLj-e0-ZSU" id="WFc-bF-h1I"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Full-Size Image" id="rZg-6j-sec">
+                    <navigationItem key="navigationItem" id="rZg-6j-sec">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="RtS-jj-bDS">
                             <connections>
                                 <action selector="btnCancel:" destination="JLj-e0-ZSU" id="VcE-wH-qHG"/>
@@ -149,6 +149,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="gestureDoubleTap" destination="EOm-Eh-6zT" id="fUb-Rp-IP2"/>
+                        <outlet property="gesturePanCharacter" destination="klK-Be-csZ" id="s8B-iP-YdV"/>
+                        <outlet property="gesturePinchCharacter" destination="bcg-Lf-5hF" id="UH7-vI-DC4"/>
+                        <outlet property="gestureRotateCharacter" destination="mb6-hv-wtv" id="CVg-xH-9sr"/>
                         <outlet property="imgCharacter1" destination="XWz-T2-vQX" id="Tlb-p0-fYF"/>
                         <outlet property="imgView" destination="BTX-n2-WIw" id="uey-CQ-Vlr"/>
                     </connections>
@@ -157,8 +160,27 @@
                 <tapGestureRecognizer numberOfTapsRequired="2" id="EOm-Eh-6zT">
                     <connections>
                         <action selector="handleGestureDoubleTap:" destination="JLj-e0-ZSU" id="z2F-2w-pDL"/>
+                        <outlet property="delegate" destination="JLj-e0-ZSU" id="LgV-IO-cEP"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="klK-Be-csZ">
+                    <connections>
+                        <action selector="handleGesturePanCharacter:" destination="JLj-e0-ZSU" id="SpT-ux-d8P"/>
+                        <outlet property="delegate" destination="JLj-e0-ZSU" id="17y-O1-l6m"/>
+                    </connections>
+                </panGestureRecognizer>
+                <pinchGestureRecognizer id="bcg-Lf-5hF">
+                    <connections>
+                        <action selector="handleGesturePinchCharacter:" destination="JLj-e0-ZSU" id="tN0-Fb-pl0"/>
+                        <outlet property="delegate" destination="JLj-e0-ZSU" id="TYu-Ti-6Jc"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <rotationGestureRecognizer id="mb6-hv-wtv">
+                    <connections>
+                        <action selector="handleGestureRotateCharacter:" destination="JLj-e0-ZSU" id="PCR-O4-wj2"/>
+                        <outlet property="delegate" destination="JLj-e0-ZSU" id="LbI-gF-diw"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1051" y="336"/>
         </scene>
@@ -207,8 +229,6 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="jmi-8u-R7S" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="600"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="u3w-n8-qzC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
