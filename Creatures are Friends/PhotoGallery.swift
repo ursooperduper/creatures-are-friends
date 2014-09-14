@@ -85,6 +85,8 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         
         // Fetch the photos
         self.photos = PHAsset.fetchAssetsInAssetCollection(self.assetCollection, options: nil)
+        
+        
         //!!Handle the case where no photos are loaded
         // Add a label that says, "No Photos", perhaps
         //if galleryLoaded == false {
@@ -119,7 +121,6 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         return count
     }
     
-    
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
         
@@ -131,7 +132,6 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         })
         return cell
     }
-    
     
     // UICollectionViewDelegateFlowLayout methods
     
