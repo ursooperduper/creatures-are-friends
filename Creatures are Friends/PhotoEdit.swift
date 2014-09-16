@@ -63,58 +63,11 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func btnExport(sender: AnyObject) {
         println("Save Image")
         // Save and share should probably go here
-//        var alert = UIAlertController(title: "Save", message: "Would you like to save this image?", preferredStyle: .Alert)
-//        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(alertAction) in
-//            
-//            var asset: PHAsset = self.photos[self.index] as PHAsset
-//            
-//            asset.requestContentEditingInputWithOptions(nil, completionHandler: {(editingInput: PHContentEditingInput!, info) in
-//                
-//                var url: NSURL = editingInput.fullSizeImageURL
-//                var orientation = editingInput.fullSizeImageOrientation
-//                
-//                var inputImage: CIImage = CIImage(contentsOfURL: url, options: nil)
-//                inputImage = inputImage.imageByApplyingOrientation(orientation)
-//                
-//                
-//                var theImage = self.setupImage(self.imgCharacter1.image, bgImg: inputImage)
-//                
-//                self.imgView.image = UIImage(CIImage: theImage)
-//                self.imgCharacter1.hidden = true
-//                
-//                var output: PHContentEditingOutput = PHContentEditingOutput(contentEditingInput: editingInput)
-//                
-//                var context = CIContext(options: nil)
-//                
-//                var cgImg: CGImageRef = context.createCGImage(theImage, fromRect: theImage.extent())
-//                
-//                var pixelData: NSData! = UIImagePNGRepresentation(UIImage(CGImage: cgImg))
-//                pixelData.writeToURL(output.renderedContentURL, atomically: true)
-//                
-//                var imgData: NSDictionary = ["scale":1, "rotation":0]
-//                
-//                var archivedData: NSData = NSKeyedArchiver.archivedDataWithRootObject(imgData)
-//               
-//                var adjustmentData = PHAdjustmentData(formatIdentifier: "com.sooperduper", formatVersion: "1.0", data: archivedData)
-//                
-//                output.adjustmentData = adjustmentData
-//                
-//                PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-//                
-//                    var request: PHAssetChangeRequest = PHAssetChangeRequest(forAsset: asset)
-//                    request.contentEditingOutput = output
-//                    
-//                    }, completionHandler: {(success, error) in
-//                        NSLog("Image created -> %@", success ? "Success" : "Error")
-//                        NSLog("Error data -> %@", error)
-//                })
-//            })
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: {(alertAction) in
-//            alert.dismissViewControllerAnimated(true, completion: nil)
-//        }))
-//        self.presentViewController(alert, animated: true, completion: nil)
+
+        // Can we take a snapshot of the view and save it to the photo library?
         
+        
+            //UIImageWriteToSavedPhotosAlbum(imageToBeSaved, nil, nil, nil);
     }
     
     // ** GESTURES **
