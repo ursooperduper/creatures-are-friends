@@ -49,7 +49,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         return converted
     }
     
-    // Retrieves an image using PHImageManager, the target size is of the screen dimensions. (but will need to be adapted for iPhone 5, 6, 6+)
+    // Retrieves an image using PHImageManager, the target size is of the screen dimensions.
     func displayPhoto() {
         let imageManager = PHImageManager.defaultManager()
         var optionsForImage: PHImageRequestOptions = PHImageRequestOptions()
