@@ -24,6 +24,8 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var imgCharacter1: UIImageView!
+    @IBOutlet var viewImage: UIView!
+    
     let characterCount = 20
     
     var imgLocationSet: CGPoint!
@@ -34,8 +36,8 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // Sets up image
-    func setupImage(fgImg: UIImage, bgImg: CIImage) -> CIImage {
-        let backgroundImg = bgImg
+    func setupImage(fgImg: UIImage, bgImg: UIImage) -> UIImage {
+        let backgroundImg = CIImage(image: bgImg)
         let foregroundImg = CIImage(image: fgImg)
         
         let filter = CIFilter(name: "CISourceOverCompositing")
@@ -43,17 +45,30 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         filter.setValue(backgroundImg, forKey: "inputBackgroundImage")
         
         let newImage: CIImage = filter.outputImage
-        return newImage
+        let converted: UIImage = UIImage(CIImage: newImage)
+        return converted
     }
     
     // Retrieves an image using PHImageManager, the target size is of the screen dimensions. (but will need to be adapted for iPhone 5, 6, 6+)
     func displayPhoto() {
         let imageManager = PHImageManager.defaultManager()
-        //var optionsForImage: PHImageRequestOptions = PHImageRequestOptions()
+        var optionsForImage: PHImageRequestOptions = PHImageRequestOptions()
+        optionsForImage.resizeMode = .Exact
+        //optionsForImage.deliveryMode = .HighQualityFormat
         
-        var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: 320, height: 459), contentMode: .AspectFit, options: nil, resultHandler: {(result, info) in
+        var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: 320, height: 460), contentMode: .AspectFit, options: optionsForImage, resultHandler: {(result, info) in
             self.imgView.image = result
         })
+    }
+  
+    
+    // Convert a UIView to a UIImage so we can save a screenshot of the selected image
+    func getUIImageFromView(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContext(view.bounds.size)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext())
+        var graphicImg: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return graphicImg
     }
     
     // Button Actions
@@ -63,11 +78,12 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func btnExport(sender: AnyObject) {
         println("Save Image")
         // Save and share should probably go here
-
-        // Can we take a snapshot of the view and save it to the photo library?
         
+        var imageToSave: UIImage = getUIImageFromView(viewImage)
         
-            //UIImageWriteToSavedPhotosAlbum(imageToBeSaved, nil, nil, nil);
+        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
+        
+        self.navigationController.popToRootViewControllerAnimated(true)
     }
     
     // ** GESTURES **
