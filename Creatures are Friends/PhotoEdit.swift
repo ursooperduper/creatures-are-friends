@@ -28,8 +28,32 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     
     var imgLocationSet: CGPoint!
     
+    // Returns a random integer between two specified numbers
     func randomInt(min: Int, max: Int) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    }
+    
+    // Sets up image
+    func setupImage(fgImg: UIImage, bgImg: CIImage) -> CIImage {
+        let backgroundImg = bgImg
+        let foregroundImg = CIImage(image: fgImg)
+        
+        let filter = CIFilter(name: "CISourceOverCompositing")
+        filter.setValue(foregroundImg, forKey: "inputImage")
+        filter.setValue(backgroundImg, forKey: "inputBackgroundImage")
+        
+        let newImage: CIImage = filter.outputImage
+        return newImage
+    }
+    
+    // Retrieves an image using PHImageManager, the target size is of the screen dimensions. (but will need to be adapted for iPhone 5, 6, 6+)
+    func displayPhoto() {
+        let imageManager = PHImageManager.defaultManager()
+        //var optionsForImage: PHImageRequestOptions = PHImageRequestOptions()
+        
+        var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: 320, height: 459), contentMode: .AspectFit, options: nil, resultHandler: {(result, info) in
+            self.imgView.image = result
+        })
     }
     
     // Button Actions
@@ -39,64 +63,62 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func btnExport(sender: AnyObject) {
         println("Save Image")
         // Save and share should probably go here
-        var alert = UIAlertController(title: "Save", message: "Would you like to save this image?", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(alertAction) in
-            
-            // hide the character head
-            self.imgCharacter1.hidden = true
-            
-            var currentBG: UIImage = self.imgView.image
-            
-            var dataFromImage: NSData = UIImagePNGRepresentation(currentBG) // returns image as jpeg
-            
-            var characterImg: NSData = UIImagePNGRepresentation(self.imgCharacter1.image)
-            
-            var beginImage = CIImage(data: dataFromImage)
-            var context = CIContext(options: nil)
-           
-            var characterHead = CIImage(data: characterImg)
-            
-            var filter = CIFilter(name: "CISourceOverCompositing")
-            
-            filter.setDefaults()
-            filter.setValue(characterHead, forKey: "inputImage")
-            filter.setValue(beginImage, forKey: "inputBackgroundImage")
-            
-            var outputImage: CIImage = filter.valueForKey("outputImage") as CIImage
-            
-            var extent = characterHead.extent()
-            
-            var cgimg: CGImageRef = context.createCGImage(outputImage, fromRect: extent)
-            
-            var newImage = UIImage(CGImage: cgimg)
-            
-            self.imgView.image = newImage
-            
-            NSLog("\nView width: %@", self.view.bounds.width)
-            NSLog("\nView height: %@", self.view.bounds.height)
-            
-            NSLog("\nCharacter height: %@", self.characterWidth)
-            NSLog("\nCharacter width: %@", self.characterHeight)
-            NSLog("\nCharacter XPos: %@", self.characterPosX)
-            NSLog("\nCharacter YPos: %@", self.characterPosY)
-//            NSLog("\nCharacter scale: %@", self.characterScale)
-//            NSLog("\nCharacter rotation: %@", self.characterRotation)
-            
-            NSLog("\nNew image width: %@", newImage.size.width)
-            NSLog("\nNew image height: %@", newImage.size.height)
-
-
-            
-            
-            //alert.dismissViewControllerAnimated(true, completion: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: {(alertAction) in
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
+//        var alert = UIAlertController(title: "Save", message: "Would you like to save this image?", preferredStyle: .Alert)
+//        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(alertAction) in
+//            
+//            var asset: PHAsset = self.photos[self.index] as PHAsset
+//            
+//            asset.requestContentEditingInputWithOptions(nil, completionHandler: {(editingInput: PHContentEditingInput!, info) in
+//                
+//                var url: NSURL = editingInput.fullSizeImageURL
+//                var orientation = editingInput.fullSizeImageOrientation
+//                
+//                var inputImage: CIImage = CIImage(contentsOfURL: url, options: nil)
+//                inputImage = inputImage.imageByApplyingOrientation(orientation)
+//                
+//                
+//                var theImage = self.setupImage(self.imgCharacter1.image, bgImg: inputImage)
+//                
+//                self.imgView.image = UIImage(CIImage: theImage)
+//                self.imgCharacter1.hidden = true
+//                
+//                var output: PHContentEditingOutput = PHContentEditingOutput(contentEditingInput: editingInput)
+//                
+//                var context = CIContext(options: nil)
+//                
+//                var cgImg: CGImageRef = context.createCGImage(theImage, fromRect: theImage.extent())
+//                
+//                var pixelData: NSData! = UIImagePNGRepresentation(UIImage(CGImage: cgImg))
+//                pixelData.writeToURL(output.renderedContentURL, atomically: true)
+//                
+//                var imgData: NSDictionary = ["scale":1, "rotation":0]
+//                
+//                var archivedData: NSData = NSKeyedArchiver.archivedDataWithRootObject(imgData)
+//               
+//                var adjustmentData = PHAdjustmentData(formatIdentifier: "com.sooperduper", formatVersion: "1.0", data: archivedData)
+//                
+//                output.adjustmentData = adjustmentData
+//                
+//                PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+//                
+//                    var request: PHAssetChangeRequest = PHAssetChangeRequest(forAsset: asset)
+//                    request.contentEditingOutput = output
+//                    
+//                    }, completionHandler: {(success, error) in
+//                        NSLog("Image created -> %@", success ? "Success" : "Error")
+//                        NSLog("Error data -> %@", error)
+//                })
+//            })
+//        }))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: {(alertAction) in
+//            alert.dismissViewControllerAnimated(true, completion: nil)
+//        }))
+//        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
+    // ** GESTURES **
+    // Gesture: Double Tap
     @IBOutlet var gestureDoubleTap: UITapGestureRecognizer!
     @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
         var location = recognizer.locationInView(self.view)
@@ -108,12 +130,11 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         var character = UIImage(named: "head_" + String(randomInt(1, max: 20)))
         imgCharacter1.image = character
         
-        imgCharacter1.removeGestureRecognizer(gestureDoubleTap)
-        
         characterHeight = imgCharacter1.bounds.height
         characterWidth = imgCharacter1.bounds.width
     }
 
+    // Gesture: Pan
     // Allow the user to drag the character around the screen.
     @IBOutlet var gesturePanCharacter: UIPanGestureRecognizer!
     @IBAction func handleGesturePanCharacter(recognizer: UIPanGestureRecognizer) {
@@ -126,7 +147,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         characterPosY = recognizer.view!.center.y + translation.y
     }
     
-    // Allow the user to pinch the character to scale and size it
+    // Gesture: Pinch (to scale)
     @IBOutlet var gesturePinchCharacter: UIPinchGestureRecognizer!
     @IBAction func handleGesturePinchCharacter(recognizer: UIPinchGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformScale(recognizer.view!.transform, recognizer.scale, recognizer.scale)
@@ -136,7 +157,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         recognizer.scale = 1
     }
     
-    // Allow the user to rotate the character
+    // Gesture: Rotate
     @IBOutlet var gestureRotateCharacter: UIRotationGestureRecognizer!
     @IBAction func handleGestureRotateCharacter(recognizer: UIRotationGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
@@ -146,6 +167,8 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         recognizer.rotation = 0
     }
     
+    
+    // Controller override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(gestureDoubleTap)
@@ -180,19 +203,8 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func displayPhoto() {
-        let imageManager = PHImageManager.defaultManager()
-        // commented out: targetSize: PHImageManagerMaximumSize in favor or square test
-        var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: 300, height: 300), contentMode: .AspectFit, options: nil, resultHandler: {(result, info) in
-            self.imgView.image = result
-            
-            NSLog("\nNew Image Width: %@", self.imgView.image.size.width)
-            NSLog("\nNew Image Height: %@", self.imgView.image.size.height)
-            NSLog("\nNew Image Scale: %@", self.imgView.image.scale)
-            
-        })
-    }
+
+    // Optional method implementations
     
     // Implement gesture delegate recognizer optional function to allow the user to perform multiple gesturesx
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {

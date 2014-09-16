@@ -15,7 +15,6 @@
 		2610CC2D19C23030009E7B64 /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC2C19C23030009E7B64 /* PhotoGallery.swift */; };
 		2610CC2F19C23050009E7B64 /* PhotoEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC2E19C23050009E7B64 /* PhotoEdit.swift */; };
 		2610CC3119C230BC009E7B64 /* PhotoThumb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610CC3019C230BC009E7B64 /* PhotoThumb.swift */; };
-		264F3D6419C49EA300EFD6BA /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264F3D6319C49EA300EFD6BA /* LaunchScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +40,6 @@
 		2610CC2C19C23030009E7B64 /* PhotoGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; tabWidth = 4; };
 		2610CC2E19C23050009E7B64 /* PhotoEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PhotoEdit.swift; sourceTree = "<group>"; tabWidth = 4; };
 		2610CC3019C230BC009E7B64 /* PhotoThumb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumb.swift; sourceTree = "<group>"; };
-		264F3D6319C49EA300EFD6BA /* LaunchScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchScreen.swift; path = ../LaunchScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +83,6 @@
 		2610CC0219C227A4009E7B64 /* Creatures are Friends */ = {
 			isa = PBXGroup;
 			children = (
-				264F3D6319C49EA300EFD6BA /* LaunchScreen.swift */,
 				2610CC0519C227A4009E7B64 /* AppDelegate.swift */,
 				2610CC0919C227A4009E7B64 /* Main.storyboard */,
 				2610CC2C19C23030009E7B64 /* PhotoGallery.swift */,
@@ -94,10 +91,10 @@
 				2610CC0C19C227A4009E7B64 /* Images.xcassets */,
 				2610CC0319C227A4009E7B64 /* Supporting Files */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			path = "Creatures are Friends";
 			sourceTree = "<group>";
-			tabWidth = 2;
+			tabWidth = 4;
 			usesTabs = 0;
 		};
 		2610CC0319C227A4009E7B64 /* Supporting Files */ = {
@@ -227,7 +224,6 @@
 			files = (
 				2610CC2D19C23030009E7B64 /* PhotoGallery.swift in Sources */,
 				2610CC3119C230BC009E7B64 /* PhotoThumb.swift in Sources */,
-				264F3D6419C49EA300EFD6BA /* LaunchScreen.swift in Sources */,
 				2610CC2F19C23050009E7B64 /* PhotoEdit.swift in Sources */,
 				2610CC0619C227A4009E7B64 /* AppDelegate.swift in Sources */,
 			);

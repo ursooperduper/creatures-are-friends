@@ -14,7 +14,7 @@ let albumName = "Creatures are Friends"
 
 class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var albumFound: Bool = false            // Set when we do a check for the Photo Gallery album name
+    var albumFound: Bool = false            
     var assetCollection: PHAssetCollection!
     var photos: PHFetchResult!
     var galleryLoaded: Bool = false
@@ -56,12 +56,8 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
-        //        fetchOptions.sortDescriptors[
-        //            NSSortDescriptor(key: "createdDate", ascending: true, selector:)
-        //        ]
         
-        
-        // Check if the folder exists. If it doesn't create it.
+        // Check if the app photo folder exists. If it doesn't create it.
         let collection = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .Any, options: fetchOptions)
         
         if collection.firstObject != nil {
@@ -110,6 +106,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         }
     }
     
+    
     // The following functions are set up to instantiate the supporting types for this class.
     
     // UICollectionViewDataSource methods
@@ -125,10 +122,12 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
         
         let cell: PhotoThumb = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as PhotoThumb
-        
+
         // Modify the cell
         let asset: PHAsset = self.photos[indexPath.item] as PHAsset
-        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: PHImageManagerMaximumSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in cell.setThumbnailImage(result)
+        PHCachingImageManager.defaultManager().requestImageForAsset(asset, targetSize: CGSize(width: 320, height: 459), contentMode: .AspectFill, options: nil, resultHandler: {(result, info) in
+            
+            cell.setThumbnailImage(result)
         })
         return cell
     }
@@ -141,7 +140,6 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 1
     }
-    
     
     // UIImagePickerControllerDelegate methods
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary) {

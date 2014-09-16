@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="quj-rS-nbq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="quj-rS-nbq">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
@@ -8,21 +8,18 @@
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="PhotoGallery" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WR2-ls-ga9">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionView clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="WR2-ls-ga9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="573"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="obS-kM-zui">
-                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="itemSize" width="105" height="105"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -32,31 +29,23 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lud-Ez-9kO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                    </variation>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lud-Ez-9kO">
+                                                    <rect key="frame" x="1" y="0.0" width="105" height="105"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <size key="customSize" width="100" height="100"/>
+                                        <size key="customSize" width="105" height="105"/>
                                         <connections>
                                             <outlet property="imgView" destination="lud-Ez-9kO" id="oFg-OZ-SM3"/>
-                                            <segue destination="JLj-e0-ZSU" kind="show" identifier="viewLargePhoto" id="eAm-1f-AEo"/>
+                                            <segue destination="JLj-e0-ZSU" kind="push" identifier="viewLargePhoto" id="eAm-1f-AEo"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="bTt-ru-8wA"/>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="BbW-ZQ-HVd"/>
@@ -64,12 +53,6 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="WR2-ls-ga9" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="2td-lv-cDV"/>
-                            <constraint firstAttribute="centerY" secondItem="WR2-ls-ga9" secondAttribute="centerY" id="XLA-nu-MiO"/>
-                            <constraint firstAttribute="centerX" secondItem="WR2-ls-ga9" secondAttribute="centerX" id="ZeX-Dd-aal"/>
-                            <constraint firstItem="WR2-ls-ga9" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" id="mY7-Kb-BS9"/>
-                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem systemItem="organize" id="EKR-yF-TzN">
@@ -91,32 +74,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="352" y="336"/>
+            <point key="canvasLocation" x="187" y="318"/>
         </scene>
         <!--Photo Edit-->
         <scene sceneID="ggJ-nE-8UN">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="JLj-e0-ZSU" customClass="PhotoEdit" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pyy-du-Nff"/>
-                        <viewControllerLayoutGuide type="bottom" id="IxZ-Ry-3cE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleAspectFill" id="lbm-Dj-JAt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BTX-n2-WIw">
-                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="BTX-n2-WIw">
+                                <rect key="frame" x="0.0" y="64" width="320" height="459"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
-                                </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="EOm-Eh-6zT" appends="YES" id="t6G-Ua-sOV"/>
                                 </connections>
                             </imageView>
-                            <imageView hidden="YES" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head_1" translatesAutoresizingMaskIntoConstraints="NO" id="XWz-T2-vQX">
+                            <imageView hidden="YES" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_1" id="XWz-T2-vQX">
                                 <rect key="frame" x="0.0" y="64" width="265" height="334"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="klK-Be-csZ" appends="YES" id="20J-xs-9DJ"/>
@@ -126,12 +104,6 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="BTX-n2-WIw" secondAttribute="centerX" id="183-Ow-N7O"/>
-                            <constraint firstAttribute="centerY" secondItem="BTX-n2-WIw" secondAttribute="centerY" constant="-10" id="F81-El-Lvj"/>
-                            <constraint firstItem="BTX-n2-WIw" firstAttribute="width" secondItem="lbm-Dj-JAt" secondAttribute="width" id="Vdw-dT-tvs"/>
-                            <constraint firstItem="BTX-n2-WIw" firstAttribute="height" secondItem="lbm-Dj-JAt" secondAttribute="height" constant="-108" id="h4T-FY-ZLW"/>
-                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem systemItem="action" id="sht-0i-klP">
@@ -182,47 +154,39 @@
                     </connections>
                 </rotationGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1051" y="336"/>
+            <point key="canvasLocation" x="612" y="318"/>
         </scene>
-        <!--Launch Screen-->
+        <!--View Controller-->
         <scene sceneID="Dfm-h8-3tO">
             <objects>
-                <viewController id="quj-rS-nbq" customClass="LaunchScreen" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="scw-KO-dXL"/>
-                        <viewControllerLayoutGuide type="bottom" id="izl-1y-obc"/>
-                    </layoutGuides>
+                <viewController id="quj-rS-nbq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MQ4-Nw-5Gu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="7ZY-O2-8de">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title" id="7ZY-O2-8de">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="er6-4p-k0d">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="er6-4p-k0d">
                                 <rect key="frame" x="69" y="298" width="163" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Get Started">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="jmi-8u-R7S" kind="show" id="XH7-q7-wc8"/>
+                                    <segue destination="jmi-8u-R7S" kind="modal" id="XH7-q7-wc8"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="7ZY-O2-8de" secondAttribute="centerX" id="2v6-Zn-cGA"/>
-                            <constraint firstItem="7ZY-O2-8de" firstAttribute="width" secondItem="MQ4-Nw-5Gu" secondAttribute="width" id="58w-bU-0sr"/>
-                            <constraint firstAttribute="centerY" secondItem="7ZY-O2-8de" secondAttribute="centerY" id="E1L-5H-tcT"/>
-                            <constraint firstItem="7ZY-O2-8de" firstAttribute="height" secondItem="MQ4-Nw-5Gu" secondAttribute="height" id="bTb-Ud-IqQ"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4X-P2-55c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-373" y="336"/>
+            <point key="canvasLocation" x="-247" y="318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6xS-uY-MRW">
@@ -243,11 +207,19 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6s9-eC-8rj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="352" y="-476"/>
+            <point key="canvasLocation" x="187" y="-363"/>
         </scene>
     </scenes>
     <resources>
         <image name="head_1" width="334" height="420"/>
         <image name="title" width="640" height="1136"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
+    </simulatedMetricsContainer>
 </document>
