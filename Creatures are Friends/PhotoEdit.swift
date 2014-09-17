@@ -15,13 +15,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     var photos: PHFetchResult!
     var index: Int = 0
     
-    var characterPosX: CGFloat!
-    var characterPosY: CGFloat!
-    var characterScale: CGFloat!
-    var characterRotation: CGFloat!
-    var characterWidth: CGFloat!
-    var characterHeight: CGFloat!
-    
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var imgCharacter1: UIImageView!
     @IBOutlet var viewImage: UIView!
@@ -98,9 +91,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         
         var character = UIImage(named: "head_" + String(randomInt(1, max: 20)))
         imgCharacter1.image = character
-        
-        characterHeight = imgCharacter1.bounds.height
-        characterWidth = imgCharacter1.bounds.width
     }
 
     // Gesture: Pan
@@ -111,18 +101,12 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         recognizer.view!.center = CGPoint(x:recognizer.view!.center.x + translation.x,
             y:recognizer.view!.center.y + translation.y)
         recognizer.setTranslation(CGPointZero, inView: self.view)
-        
-        characterPosX = recognizer.view!.center.x + translation.x
-        characterPosY = recognizer.view!.center.y + translation.y
     }
     
     // Gesture: Pinch (to scale)
     @IBOutlet var gesturePinchCharacter: UIPinchGestureRecognizer!
     @IBAction func handleGesturePinchCharacter(recognizer: UIPinchGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformScale(recognizer.view!.transform, recognizer.scale, recognizer.scale)
-        
-        characterScale = recognizer.scale
-        
         recognizer.scale = 1
     }
     
@@ -130,9 +114,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var gestureRotateCharacter: UIRotationGestureRecognizer!
     @IBAction func handleGestureRotateCharacter(recognizer: UIRotationGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
-        
-        characterRotation = recognizer.rotation
-        
         recognizer.rotation = 0
     }
     
@@ -170,7 +151,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // Optional method implementations

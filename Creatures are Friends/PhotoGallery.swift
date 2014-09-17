@@ -85,6 +85,8 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         
         //!!Handle the case where no photos are loaded
         // Add a label that says, "No Photos", perhaps
+        
+        
         //if galleryLoaded == false {
             self.collectionView.reloadData()
         //    galleryLoaded = true
@@ -105,7 +107,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
             controller.assetCollection = self.assetCollection
         }
     }
-    
+
     
     // The following functions are set up to instantiate the supporting types for this class.
     
@@ -133,7 +135,6 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     }
     
     // UICollectionViewDelegateFlowLayout methods
-    
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 2
     }
