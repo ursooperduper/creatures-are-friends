@@ -18,7 +18,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var imgCharacter1: UIImageView!
     @IBOutlet var viewImage: UIView!
-    
+
     let characterCount = 20
     
     var imgLocationSet: CGPoint!
@@ -26,20 +26,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     // Returns a random integer between two specified numbers
     func randomInt(min: Int, max: Int) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
-    }
-    
-    // Sets up image
-    func setupImage(fgImg: UIImage, bgImg: UIImage) -> UIImage {
-        let backgroundImg = CIImage(image: bgImg)
-        let foregroundImg = CIImage(image: fgImg)
-        
-        let filter = CIFilter(name: "CISourceOverCompositing")
-        filter.setValue(foregroundImg, forKey: "inputImage")
-        filter.setValue(backgroundImg, forKey: "inputBackgroundImage")
-        
-        let newImage: CIImage = filter.outputImage
-        let converted: UIImage = UIImage(CIImage: newImage)
-        return converted
     }
     
     // Retrieves an image using PHImageManager, the target size is of the screen dimensions.
@@ -54,7 +40,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         })
     }
   
-    
     // Convert a UIView to a UIImage so we can save a screenshot of the selected image
     func getUIImageFromView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContext(view.bounds.size)
@@ -64,19 +49,34 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         return graphicImg
     }
     
+    func addNewAssetWithImage(image: UIImage, toAlbum album:PHAssetCollection) {
+        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+            // Request creating an asset from the image.
+            let createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
+            
+            // Request editing the album.
+            let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: album)
+            
+            // Get a placeholder for the new asset and add it to the album editing request.
+            let assetPlaceholder = createAssetRequest.placeholderForCreatedAsset
+            albumChangeRequest.addAssets([assetPlaceholder])
+            
+            }, completionHandler: { success, error in
+                NSLog("Finished adding asset. %@", (success ? "Success" : error))
+        })
+    }
+    
     // Button Actions
     @IBAction func btnCancel(sender: AnyObject) {
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     @IBAction func btnExport(sender: AnyObject) {
         println("Save Image")
-        // Save and share should probably go here
         
-        var imageToSave: UIImage = getUIImageFromView(viewImage)
+        let imageToSave: UIImage = getUIImageFromView(viewImage)
+        addNewAssetWithImage(imageToSave, toAlbum: self.assetCollection)
         
-        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
-        
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     // ** GESTURES **
@@ -128,13 +128,13 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController.setToolbarHidden(false, animated: false)
+        self.navigationController?.setToolbarHidden(false, animated: false)
         self.displayPhoto()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController.setToolbarHidden(false, animated: false)
+        self.navigationController?.setToolbarHidden(false, animated: false)
         self.becomeFirstResponder()
     }
     
@@ -142,7 +142,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         return true
     }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent!) {
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
         if(event.subtype == UIEventSubtype.MotionShake) {
             var character = UIImage(named: "head_" + String(randomInt(1, max: characterCount)))
             imgCharacter1.image = character
@@ -159,4 +159,5 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
         return true
     }
+
 }
