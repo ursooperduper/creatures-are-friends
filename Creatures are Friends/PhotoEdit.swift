@@ -11,17 +11,32 @@ import Photos
 
 class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     
+    let characterCount = 20
     var assetCollection: PHAssetCollection!
     var photos: PHFetchResult!
-    var index: Int = 0
+    var index: Int!
+    var imgLocationSet: CGPoint!
     
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var imgCharacter1: UIImageView!
     @IBOutlet var viewImage: UIView!
-
-    let characterCount = 20
     
-    var imgLocationSet: CGPoint!
+    
+    func getComposite(topImg: UIImage, bottomImg: UIImage) {
+        // create a context, this will store the image
+        var context: CIContext = CIContext(options: nil)
+        // Create CIImage versions of the top and bottom images
+        var fgImg: CIImage = CIImage(image: topImg)
+        var bgImg: CIImage = CIImage(image: bottomImg)
+        
+        
+        var compFilter: CIFilter = CIFilter(name: "CISourceOverCompositing")
+        compFilter.setValue(fgImg, forKey: "inputImage")
+        compFilter.setValue(bgImg, forKey: "inputBackgroundImage")
+        var result: CIImage = compFilter.valueForKey("outputImage") as CIImage
+        
+        //
+    }
     
     // Returns a random integer between two specified numbers
     func randomInt(min: Int, max: Int) -> Int {
@@ -85,7 +100,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
         var location = recognizer.locationInView(self.view)
         imgLocationSet = location
-        
         imgCharacter1.hidden = false
         imgCharacter1.center = location
         
