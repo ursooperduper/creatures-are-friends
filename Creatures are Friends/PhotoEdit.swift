@@ -83,9 +83,9 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     // Gesture: Double Tap
     @IBOutlet var gestureDoubleTap: UITapGestureRecognizer!
     @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
+        
         var location = recognizer.locationInView(self.view)
         imgLocationSet = location
-        
         imgCharacter1.hidden = false
         imgCharacter1.center = location
         
@@ -116,7 +116,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
         recognizer.rotation = 0
     }
-    
     
     // Controller override methods
     override func viewDidLoad() {
