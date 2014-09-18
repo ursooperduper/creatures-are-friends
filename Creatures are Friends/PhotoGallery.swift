@@ -12,7 +12,7 @@ import Photos
 let reuseIdentifier = "photoCell"
 let albumName = "Creatures are Friends"
 
-class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPhotoLibraryChangeObserver {
+class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var albumFound: Bool = false            
     var assetCollection: PHAssetCollection!
@@ -180,66 +180,66 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     
     
-    func photoLibraryDidChange(changeInstance: PHChange!) {
-        let changeDetails = changeInstance.changeDetailsForFetchResult(self.photos)
-        
-        self.photos = changeDetails.fetchResultAfterChanges
-        dispatch_async(dispatch_get_main_queue()) {
-            // Loop through the visible cell indices
-            
-            if changeDetails.hasIncrementalChanges {
-                
-                let indexPaths = self.collectionView?.indexPathsForVisibleItems()
-
-                var removedPaths: [NSIndexPath]?
-                var insertedPaths: [NSIndexPath]?
-                var changedPaths: [NSIndexPath]?
-                
-                if let removed = changeDetails.removedIndexes {
-//                   removedPaths =
-                    
-                }
-                
-                if let inserted = changeDetails.insertedIndexes {
-                    
-                }
-                
-                if let changed = changeDetails.changedIndexes {
-                    
-                }
-                
-                self.collectionView.performBatchUpdates({
-                
-                    if removedPaths != nil {
-                        self.collectionView.deleteItemsAtIndexPaths(removedPaths!)
-                    }
-                    
-                    if insertedPaths != nil {
-                        self.collectionView.insertItemsAtIndexPaths(insertedPaths!)
-                    }
-                    
-                    if changedPaths != nil {
-                        self.collectionView.reloadItemsAtIndexPaths(changedPaths!)
-                    }
-                    
-                    if changeDetails.hasMoves {
-                        changeDetails.enumerateMovesWithBlock({ (fromIndex, toIndex) -> Void in
-                            let fromIndexPath = NSIndexPath(forItem: fromIndex, inSection: 0)
-                            let toIndexPath = NSIndexPath(forItem: toIndex, inSection: 0)
-                            self.collectionView.moveItemAtIndexPath(fromIndexPath, toIndexPath: toIndexPath)
-                        })
-                    }
-                    
-                    
-                
-                }, completion: nil)
-            } else {
-                // Detailed change information isn't available
-                // Just use the current fetch result to repopulate 
-                // the cell grid
-                self.collectionView.reloadData()
-            }
-        }
-    }
+//    func photoLibraryDidChange(changeInstance: PHChange!) {
+//        let changeDetails = changeInstance.changeDetailsForFetchResult(self.photos)
+//        
+//        self.photos = changeDetails.fetchResultAfterChanges
+//        dispatch_async(dispatch_get_main_queue()) {
+//            // Loop through the visible cell indices
+//            
+//            if changeDetails.hasIncrementalChanges {
+//                
+//                let indexPaths = self.collectionView?.indexPathsForVisibleItems()
+//
+//                var removedPaths: [NSIndexPath]?
+//                var insertedPaths: [NSIndexPath]?
+//                var changedPaths: [NSIndexPath]?
+//                
+//                if let removed = changeDetails.removedIndexes {
+////                   removedPaths =
+//                    
+//                }
+//                
+//                if let inserted = changeDetails.insertedIndexes {
+//                    
+//                }
+//                
+//                if let changed = changeDetails.changedIndexes {
+//                    
+//                }
+//                
+//                self.collectionView.performBatchUpdates({
+//                
+//                    if removedPaths != nil {
+//                        self.collectionView.deleteItemsAtIndexPaths(removedPaths!)
+//                    }
+//                    
+//                    if insertedPaths != nil {
+//                        self.collectionView.insertItemsAtIndexPaths(insertedPaths!)
+//                    }
+//                    
+//                    if changedPaths != nil {
+//                        self.collectionView.reloadItemsAtIndexPaths(changedPaths!)
+//                    }
+//                    
+//                    if changeDetails.hasMoves {
+//                        changeDetails.enumerateMovesWithBlock({ (fromIndex, toIndex) -> Void in
+//                            let fromIndexPath = NSIndexPath(forItem: fromIndex, inSection: 0)
+//                            let toIndexPath = NSIndexPath(forItem: toIndex, inSection: 0)
+//                            self.collectionView.moveItemAtIndexPath(fromIndexPath, toIndexPath: toIndexPath)
+//                        })
+//                    }
+//                    
+//                    
+//                
+//                }, completion: nil)
+//            } else {
+//                // Detailed change information isn't available
+//                // Just use the current fetch result to repopulate 
+//                // the cell grid
+//                self.collectionView.reloadData()
+//            }
+//        }
+//    }
     
 }

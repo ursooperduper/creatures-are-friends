@@ -33,7 +33,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         let imageManager = PHImageManager.defaultManager()
         var optionsForImage: PHImageRequestOptions = PHImageRequestOptions()
         optionsForImage.resizeMode = .Exact
-        //optionsForImage.deliveryMode = .HighQualityFormat
+        optionsForImage.deliveryMode = .HighQualityFormat
         
         var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: 320, height: 460), contentMode: .AspectFit, options: optionsForImage, resultHandler: {(result, info) in
             self.imgView.image = result
