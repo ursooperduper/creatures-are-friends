@@ -16,26 +16,38 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     var photos: PHFetchResult!
     var index: Int!
     var imgLocationSet: CGPoint!
+    var totalScale: CGFloat = 1
+    var totalRotation: CGFloat = 0
+    var charLocation: CGPoint = CGPointZero
     
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var imgCharacter1: UIImageView!
     @IBOutlet var viewImage: UIView!
     
-    
-    func getComposite(topImg: UIImage, bottomImg: UIImage) {
+    // Creates a composite of the character head and photo
+    func getComposite(topImg: UIImage, bottomImg: UIImage) -> UIImage {
         // create a context, this will store the image
         var context: CIContext = CIContext(options: nil)
         // Create CIImage versions of the top and bottom images
-        var fgImg: CIImage = CIImage(image: topImg)
-        var bgImg: CIImage = CIImage(image: bottomImg)
+        var fgImg = CIImage(image: topImg)
+        var bgImg = CIImage(image: bottomImg)
+        
+        println("fgImg size: \(fgImg.extent())")
+        println("bgImg size: \(bgImg.extent())")
         
         
         var compFilter: CIFilter = CIFilter(name: "CISourceOverCompositing")
         compFilter.setValue(fgImg, forKey: "inputImage")
         compFilter.setValue(bgImg, forKey: "inputBackgroundImage")
-        var result: CIImage = compFilter.valueForKey("outputImage") as CIImage
+        var result = compFilter.valueForKey("outputImage") as CIImage
+        // Get the size of the return image
+        var extent = result.extent()
+        println("result of filter size: \(extent)")
+        var renderedImage = context.createCGImage(result, fromRect: extent)
+        var finalImage = UIImage(CGImage: renderedImage)
+        println("finalImage size: \(finalImage?.size)")
         
-        //
+        return finalImage!
     }
     
     // Returns a random integer between two specified numbers
@@ -88,7 +100,10 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func btnExport(sender: AnyObject) {
         println("Save Image")
         
-        let imageToSave: UIImage = getUIImageFromView(viewImage)
+        // Using the Screenshot approach
+        //let imageToSave: UIImage = getUIImageFromView(viewImage)
+        
+        let imageToSave: UIImage = getComposite(self.imgCharacter1.image!, bottomImg: self.imgView.image!)
         addNewAssetWithImage(imageToSave, toAlbum: self.assetCollection)
         
         self.navigationController?.popToRootViewControllerAnimated(true)
@@ -114,13 +129,23 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         let translation = recognizer.translationInView(self.view)
         recognizer.view!.center = CGPoint(x:recognizer.view!.center.x + translation.x,
             y:recognizer.view!.center.y + translation.y)
+        
+        charLocation.x += translation.x
+        charLocation.y += translation.y
+        
+        println("X: \(charLocation.x) -- Y: \(charLocation.y)")
+        
         recognizer.setTranslation(CGPointZero, inView: self.view)
+        
     }
     
     // Gesture: Pinch (to scale)
     @IBOutlet var gesturePinchCharacter: UIPinchGestureRecognizer!
     @IBAction func handleGesturePinchCharacter(recognizer: UIPinchGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformScale(recognizer.view!.transform, recognizer.scale, recognizer.scale)
+        totalScale *= recognizer.scale
+        println("Total Scale: \(totalScale)")
+        
         recognizer.scale = 1
     }
     
@@ -128,6 +153,10 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var gestureRotateCharacter: UIRotationGestureRecognizer!
     @IBAction func handleGestureRotateCharacter(recognizer: UIRotationGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
+        
+        totalRotation += recognizer.rotation
+        println("Total Rotation: \(totalRotation)")
+        
         recognizer.rotation = 0
     }
     
