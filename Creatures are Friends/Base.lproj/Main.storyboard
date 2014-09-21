@@ -88,7 +88,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="BTX-n2-WIw">
+                                    <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="BTX-n2-WIw">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <gestureRecognizers/>
@@ -96,8 +96,8 @@
                                             <outletCollection property="gestureRecognizers" destination="EOm-Eh-6zT" appends="YES" id="t6G-Ua-sOV"/>
                                         </connections>
                                     </imageView>
-                                    <imageView hidden="YES" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_1" id="XWz-T2-vQX">
-                                        <rect key="frame" x="8" y="8" width="190" height="239"/>
+                                    <imageView hidden="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_1" id="XWz-T2-vQX">
+                                        <rect key="frame" x="8" y="8" width="300" height="300"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -127,11 +127,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="characterImage" destination="XWz-T2-vQX" id="4tg-jy-hxf"/>
                         <outlet property="gestureDoubleTap" destination="EOm-Eh-6zT" id="fUb-Rp-IP2"/>
                         <outlet property="gesturePanCharacter" destination="klK-Be-csZ" id="s8B-iP-YdV"/>
                         <outlet property="gesturePinchCharacter" destination="bcg-Lf-5hF" id="UH7-vI-DC4"/>
                         <outlet property="gestureRotateCharacter" destination="mb6-hv-wtv" id="CVg-xH-9sr"/>
-                        <outlet property="imgCharacter1" destination="XWz-T2-vQX" id="Tlb-p0-fYF"/>
                         <outlet property="imgView" destination="BTX-n2-WIw" id="uey-CQ-Vlr"/>
                         <outlet property="viewImage" destination="FVL-MZ-DPk" id="Luu-EJ-HgO"/>
                     </connections>
@@ -219,7 +219,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="head_1" width="334" height="420"/>
+        <image name="head_1" width="300" height="300"/>
         <image name="title" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

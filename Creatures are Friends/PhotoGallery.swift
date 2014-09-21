@@ -44,7 +44,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         var picker: UIImagePickerController = UIImagePickerController()
         picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         picker.delegate = self
-        picker.allowsEditing = false
+        picker.allowsEditing = true
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
@@ -138,6 +138,8 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary) {
         let image = info.objectForKey(UIImagePickerControllerOriginalImage) as UIImage
         //let editedimage = info.objectForKey(UIImagePickerControllerEditedImage) as UIImage
+//        imagePickerController.allowsEditing = YES;
+        
         
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
             let createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
