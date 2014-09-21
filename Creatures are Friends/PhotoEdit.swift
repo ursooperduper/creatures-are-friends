@@ -31,7 +31,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var viewImage: UIView!
 
     // Creates a composite of the character head and photo
-    func getComposite(topImg: UIImage, bottomImg: UIImage) -> UIImage {        
+    func getComposite(topImg: UIImage, bottomImg: UIImage) -> UIImage {
         // Create CIImage versions of the top and bottom images
         var fgImg = CIImage(image: topImg)
         var bgImg = CIImage(image: bottomImg)
