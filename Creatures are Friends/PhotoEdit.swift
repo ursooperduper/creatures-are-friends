@@ -11,8 +11,6 @@ import Photos
 import CoreImage
 import CoreGraphics
 
-
-
 class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
 
     let characterCount = 20
@@ -153,8 +151,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         charLocation.x += translation.x
         charLocation.y += translation.y
 
-//        println("X: \(charLocation.x) -- Y: \(charLocation.y)")
-
         recognizer.setTranslation(CGPointZero, inView: self.view)
     }
 
@@ -163,7 +159,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func handleGesturePinchCharacter(recognizer: UIPinchGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformScale(recognizer.view!.transform, recognizer.scale, recognizer.scale)
         totalScale *= recognizer.scale
-//        println("Total Scale: \(totalScale)")
 
         recognizer.scale = 1
     }
@@ -174,7 +169,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
 
         totalRotation += recognizer.rotation
-//        println("Total Rotation: \(totalRotation)")
 
         recognizer.rotation = 0
     }
