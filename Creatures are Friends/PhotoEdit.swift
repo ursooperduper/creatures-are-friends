@@ -31,43 +31,16 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var viewImage: UIView!
 
     // Creates a composite of the character head and photo
-    func getComposite(topImg: UIImage, bottomImg: UIImage) -> UIImage {
-        
-        
-
-        
-        
-
-        
-        
+    func getComposite(topImg: UIImage, bottomImg: UIImage) -> UIImage {        
         // Create CIImage versions of the top and bottom images
         var fgImg = CIImage(image: topImg)
         var bgImg = CIImage(image: bottomImg)
-        
-//        var makePhotoRotation = CGAffineTransformMakeRotation(-CGFloat(M_PI_2))
-//        var makePhotoScale = CGAffineTransformMakeScale(1.0, 1.0)
-//        var makePhotoPosition = CGAffineTransformMakeTranslation(imgView.frame.origin.x, imgView.frame.origin.y)
-//        var affineConcatPhoto = CGAffineTransformConcat(makePhotoRotation, makePhotoScale)
-//        var affineConcatPhoto2 = CGAffineTransformConcat(affineConcatPhoto, makePhotoPosition)
-//        
-//        var photoContext = CIContext(options: nil)
-//        var photoAffineFilter = CIFilter(name: "CIAffineTransform")
-//        photoAffineFilter.setValue(bgImg, forKey: "inputImage")
-//        photoAffineFilter.setValue(NSValue(CGAffineTransform: affineConcatPhoto2), forKey: "inputTransform")
-//        var photoResult = photoAffineFilter.valueForKey("outputImage") as CIImage
-        
         // Define affine transformations
         var makeCharacterRotation = CGAffineTransformMakeRotation(-totalRotation)
         // Dividing by 2 makes the head appear correctly on iPhone 5s. Need to test on other devices.
         var makeCharacterScale = CGAffineTransformMakeScale(totalScale/2, totalScale/2)
-//        var makeCharacterTranslation = CGAffineTransformMakeTranslation(imgLocationSet.x + charLocation.x, imgLocationSet.y + charLocation.y)
-        
-//        var makeCharacterTranslation = CGAffineTransformMakeTranslation(charLocation.x, charLocation.y)
-//        var makeCharacterTranslation = CGAffineTransformMakeTranslation(-500, -500)
-        
         // Create an affine transformation matrix
         var affineConcatCharacter1 = CGAffineTransformConcat(makeCharacterScale, makeCharacterRotation)
-//        var affineConcatCharacter2 = CGAffineTransformConcat(affineConcatCharacter1, makeCharacterTranslation)
         
         // Define the context
         var affineContext = CIContext(options: nil)
@@ -78,58 +51,18 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         affineFilter.setValue(NSValue(CGAffineTransform: affineConcatCharacter1), forKey: "inputTransform")
         
         var affineResult = affineFilter.valueForKey("outputImage") as CIImage
-        
-//        println("Character Affine SIZE: \(affineResult.extent())")
-//        println("Photo Affine SIZE: \(photoResult.extent())")
-//        
-//        // create a context, this will store the image
-//        var compContext: CIContext = CIContext(options: nil)
-//        
-//        var compFilter: CIFilter = CIFilter(name: "CISourceOverCompositing")
-//        compFilter.setValue(affineResult, forKey: "inputImage")
-//        compFilter.setValue(photoResult, forKey: "inputBackgroundImage")
-//        var compResult = compFilter.valueForKey("outputImage") as CIImage
-//        
-//        // Get the size of the return image
-//        var extent = compResult.extent()
-////        var extent = bgImg.extent()
-//        println("result of filter size: \(extent)")
-//        var renderedImage = compContext.createCGImage(compResult, fromRect: extent)
-//        var finalImage = UIImage(CGImage: renderedImage)
-//        println("finalImage size: \(finalImage?.size)")
-//        
-        
         var testSize = CGSizeMake(bottomImg.size.width, bottomImg.size.height)
         UIGraphicsBeginImageContext(testSize)
         
         bottomImg.drawInRect(CGRectMake(0, 0, testSize.width, testSize.height))
         
         var newTop = UIImage(CIImage: affineResult)
-        
         var newTopWidth = newTop?.size.width
         var newTopHeight = newTop?.size.height
-        
-        println("NEW CHAR WIDTH: \(newTopWidth)")
-        println("NEW CHAR HEIGHT: \(newTopHeight)")
         
         newTop?.drawInRect(CGRectMake(characterImagePosX, characterImagePosY, newTopWidth!, newTopHeight!), blendMode: kCGBlendModeNormal, alpha: 1.0)
         
         var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//        var imageData = UIImagePNGRepresentation(newImage)
-        
-        //        var newSize = CGSizeMake(bottomImage.size.width, bottomImage.size.height)
-        //        UIGraphicsBeginImageContext( newSize )
-        //
-        //        bottomImage.drawInRect(CGRectMake(0,0,newSize.width,newSize.height))
-        //
-        //        // decrease top image to 36x36
-        //        imageTop.drawInRect(CGRectMake(18,18,36,36), blendMode:kCGBlendModeNormal, alpha:1.0)
-        //
-        //        var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        //        var imageData = UIImagePNGRepresentation(newImage)
-        
-
-//        return finalImage!
         return newImage
     }
 
@@ -147,13 +80,8 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
 //        optionsForImage.deliveryMode = .HighQualityFormat
         
 //        PHImageManagerMaximumSize
-        // CGSize(width: viewImage.bounds.width, height: viewImage.bounds.height)
         var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: viewImage.bounds.width, height: viewImage.bounds.height), contentMode: .AspectFit, options: optionsForImage, resultHandler: {(result, info) in
             self.imgView.image = result
-            
-
-            // This is the size we want for the output image
-            println("In view image size: \(self.imgView.image?.size)")
         })
     }
 
@@ -189,37 +117,13 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func btnExport(sender: AnyObject) {
-
-//        println("THE TRANSLATIONS ON THE CHARACTER ARE:")
-//        println("CHAR ACTUAL SIZE?: \(characterImage.image?.size)")
-//        println("CHAR IMG VIEW SIZE?: \(characterImage.bounds)")
-//        println("SCALE: \(totalScale)")
-//        println("ROTATION: \(totalRotation)")
-//        println("LOCATION: \(charLocation)")
-
-        // -- Approach 1: Turn UIVIew into Image
-        //let imageToSave: UIImage = getUIImageFromView(viewImage)
-        //
-        // -- Approach 2: Composite Filter
         characterImagePosX = characterImage.frame.origin.x
         characterImagePosY = characterImage.frame.origin.y
 
-        
         let imageToSave: UIImage = getComposite(self.characterImage.image!, bottomImg: self.imgView.image!)
         addNewAssetWithImage(imageToSave, toAlbum: self.assetCollection)
 
         self.navigationController?.popToRootViewControllerAnimated(true)
-        
-        
-        
-//        println("CHARACTER HEAD, WHAT IS YOUR X POSITION? \(characterImage.frame.origin.x)")
-//        println("CHARACTER HEAD, WHAT IS YOUR Y POSITION? \(characterImage.frame.origin.y)")
-//        
-        
-//        println("ORIENTATION: \(self.imgView.image?.imageOrientation.rawValue)")
-//        println("SCALE FACTOR: \(self.imgView.image?.scale)")
-//        println("SIZE: \(self.imgView.image?.size)")
-//        println("ALIGNMENT RECT INSETS: \(self.imgView.image?.alignmentRectInsets)")
     }
 
     // ** GESTURE **
