@@ -133,11 +133,13 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         
         var location = recognizer.locationInView(self.view)
         imgLocationSet = location
-        imgCharacter1.hidden = false
-        imgCharacter1.center = location
-        
-        var character = UIImage(named: "head_" + String(randomInt(1, max: 20)))
-        imgCharacter1.image = character
+        characterImage.hidden = false
+        characterImage.center = location
+
+        // Get a random character head
+        var character = UIImage(named: "head_" + String(randomInt(1, max: characterCount)))
+        characterImage.image = character
+        println("Character Image added: SIZE: \(characterImage.bounds.size)")
     }
 
     // Gesture: Pan
@@ -176,7 +178,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
 
         recognizer.rotation = 0
     }
-    
+
     // Controller override methods
     override func viewDidLoad() {
         super.viewDidLoad()
