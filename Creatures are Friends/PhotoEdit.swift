@@ -12,55 +12,74 @@ import CoreImage
 import CoreGraphics
 
 class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
-
+    
+    // Number of character images in the library
     let characterCount = 20
+    
+    // Photos Framework
     var assetCollection: PHAssetCollection!
     var photos: PHFetchResult!
     var index: Int!
-    var imgLocationSet: CGPoint!
-    var totalScale: CGFloat = 1
-    var totalRotation: CGFloat = 0
-    var charLocation: CGPoint = CGPointZero
-    var characterImagePosX: CGFloat!
-    var characterImagePosY: CGFloat!
+    
+    // Information about the character
+    var characterInfo = [ String: CGFloat]()
+    var currScale: CGFloat = 1
+    var currRotation: CGFloat = 0
+    var characterPos: CGPoint = CGPointZero
 
-    @IBOutlet var imgView: UIImageView!
-    @IBOutlet var characterImage: UIImageView!
-    @IBOutlet var viewImage: UIView!
+    @IBOutlet var imgContainer: UIView! // The View that contains the photo and character
+    @IBOutlet var photoImg: UIImageView! // The main photo
+    @IBOutlet var characterImg: UIImageView! // The character head
 
-    // Creates a composite of the character head and photo
-    func getComposite(topImg: UIImage, bottomImg: UIImage) -> UIImage {
-        // Create CIImage versions of the top and bottom images
-        var fgImg = CIImage(image: topImg)
-        var bgImg = CIImage(image: bottomImg)
-        // Define affine transformations
-        var makeCharacterRotation = CGAffineTransformMakeRotation(-totalRotation)
+    // Creates a new photo out of the combined character and photo images
+    func getCombinedImage(topImg: UIImage, bottomImg: UIImage) -> UIImage {
+        
+        // Create CIImage versions of the top & bottom images
+        let fgImg = CIImage(image: topImg)
+        let bgImg = CIImage(image: bottomImg)
+        
+        // Define the affine transformations
+        let makeRotation = CGAffineTransformMakeRotation(-(characterInfo["rotation"]!))
+        
         // Dividing by 2 makes the head appear correctly on iPhone 5s. Need to test on other devices.
-        var makeCharacterScale = CGAffineTransformMakeScale(totalScale/2, totalScale/2)
+        let makeScale = CGAffineTransformMakeScale((characterInfo["scale"])!/2, (characterInfo["scale"])!/2)
+        
         // Create an affine transformation matrix
-        var affineConcatCharacter1 = CGAffineTransformConcat(makeCharacterScale, makeCharacterRotation)
+        let affineConcat = CGAffineTransformConcat(makeScale, makeRotation)
         
         // Define the context
-        var affineContext = CIContext(options: nil)
+        let affineContext = CIContext(options: nil)
         
-        // CIAttributeTypeTransform
-        var affineFilter: CIFilter = CIFilter(name: "CIAffineTransform")
+        // Create the affine filter
+        let affineFilter: CIFilter = CIFilter(name: "CIAffineTransform")
         affineFilter.setValue(fgImg, forKey: "inputImage")
-        affineFilter.setValue(NSValue(CGAffineTransform: affineConcatCharacter1), forKey: "inputTransform")
+        affineFilter.setValue(NSValue(CGAffineTransform: affineConcat), forKey: "inputTransform")
         
-        var affineResult = affineFilter.valueForKey("outputImage") as CIImage
-        var testSize = CGSizeMake(bottomImg.size.width, bottomImg.size.height)
-        UIGraphicsBeginImageContext(testSize)
+        // Grab the resulting image data
+        let affineResult = affineFilter.valueForKey("outputImage") as CIImage
         
-        bottomImg.drawInRect(CGRectMake(0, 0, testSize.width, testSize.height))
+        // Define the size of the final image, this is the size of the photo
+        let photoSize = CGSizeMake(bottomImg.size.width, bottomImg.size.height)
         
-        var newTop = UIImage(CIImage: affineResult)
-        var newTopWidth = newTop?.size.width
-        var newTopHeight = newTop?.size.height
+        // Begin the image context
+        UIGraphicsBeginImageContext(photoSize)
         
-        newTop?.drawInRect(CGRectMake(characterImagePosX, characterImagePosY, newTopWidth!, newTopHeight!), blendMode: kCGBlendModeNormal, alpha: 1.0)
+        // Add the photo to the context
+        bottomImg.drawInRect(CGRectMake(0, 0, photoSize.width, photoSize.height))
         
-        var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        // Set up the details for the new character image
+        let newFgImg = UIImage(CIImage: affineResult)
+        let newFgImgWidth = newFgImg?.size.width
+        let newFgImgHeight = newFgImg?.size.height
+        
+        newFgImg?.drawInRect(CGRectMake(characterInfo["xPos"]!, characterInfo["yPos"]!, newFgImgWidth!, newFgImgHeight!), blendMode: kCGBlendModeNormal, alpha: 1.0)
+        
+        // Grab the graphic from the image context
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // End the context
+        UIGraphicsEndImageContext()
+        
         return newImage
     }
 
@@ -72,26 +91,16 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     // Retrieves an image using PHImageManager, the target size is of the screen dimensions.
     func displayPhoto() {
         let imageManager = PHImageManager.defaultManager()
-        var optionsForImage: PHImageRequestOptions = PHImageRequestOptions()
+        let optionsForImage = PHImageRequestOptions()
         optionsForImage.resizeMode = .Exact
         optionsForImage.synchronous = true
-//        optionsForImage.deliveryMode = .HighQualityFormat
         
-//        PHImageManagerMaximumSize
-        var id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: viewImage.bounds.width, height: viewImage.bounds.height), contentMode: .AspectFit, options: optionsForImage, resultHandler: {(result, info) in
-            self.imgView.image = result
+        let id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: imgContainer.bounds.width, height: imgContainer.bounds.height), contentMode: .AspectFill, options: optionsForImage, resultHandler: {(result, info) in
+            self.photoImg.image = result
         })
     }
 
-    // Convert a UIView to a UIImage so we can save a screenshot of the selected image
-    func getUIImageFromView(view: UIView) -> UIImage {
-        UIGraphicsBeginImageContext(view.bounds.size)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext())
-        var graphicImg: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return graphicImg
-    }
-
+    // Adds the new photo to the Creatures are Friends library
     func addNewAssetWithImage(image: UIImage, toAlbum album:PHAssetCollection) {
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
             // Request creating an asset from the image.
@@ -109,35 +118,36 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         })
     }
 
-    // Button Actions
+    // ------------------------------ Button Actions ------------------------------
+    
+    // Cancel button
     @IBAction func btnCancel(sender: AnyObject) {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    // Export/save button
     @IBAction func btnExport(sender: AnyObject) {
-        characterImagePosX = characterImage.frame.origin.x
-        characterImagePosY = characterImage.frame.origin.y
+        characterInfo["xPos"] = characterImg.frame.origin.x
+        characterInfo["yPos"] = characterImg.frame.origin.y
 
-        let imageToSave: UIImage = getComposite(self.characterImage.image!, bottomImg: self.imgView.image!)
+        let imageToSave = getCombinedImage(self.characterImg.image!, bottomImg: self.photoImg.image!)
         addNewAssetWithImage(imageToSave, toAlbum: self.assetCollection)
 
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 
-    // ** GESTURE **
+    // ** GESTURES **
     // Gesture: Double Tap
     @IBOutlet var gestureDoubleTap: UITapGestureRecognizer!
     @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
         
-        var location = recognizer.locationInView(self.view)
-        imgLocationSet = location
-        characterImage.hidden = false
-        characterImage.center = location
+        let location = recognizer.locationInView(self.view)
+        characterImg.hidden = false
+        characterImg.center = location
 
         // Get a random character head
         var character = UIImage(named: "head_" + String(randomInt(1, max: characterCount)))
-        characterImage.image = character
-        println("Character Image added: SIZE: \(characterImage.bounds.size)")
+        characterImg.image = character
     }
 
     // Gesture: Pan
@@ -147,19 +157,15 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         let translation = recognizer.translationInView(self.view)
         recognizer.view!.center = CGPoint(x:recognizer.view!.center.x + translation.x,
             y:recognizer.view!.center.y + translation.y)
-
-        charLocation.x += translation.x
-        charLocation.y += translation.y
-
         recognizer.setTranslation(CGPointZero, inView: self.view)
     }
-
+    
     // Gesture: Pinch (to scale)
     @IBOutlet var gesturePinchCharacter: UIPinchGestureRecognizer!
     @IBAction func handleGesturePinchCharacter(recognizer: UIPinchGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformScale(recognizer.view!.transform, recognizer.scale, recognizer.scale)
-        totalScale *= recognizer.scale
-
+        currScale *= recognizer.scale
+        characterInfo["scale"] = currScale
         recognizer.scale = 1
     }
 
@@ -167,19 +173,19 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var gestureRotateCharacter: UIRotationGestureRecognizer!
     @IBAction func handleGestureRotateCharacter(recognizer: UIRotationGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
-
-        totalRotation += recognizer.rotation
-
+        currRotation += recognizer.rotation
+        characterInfo["rotation"] = currRotation
         recognizer.rotation = 0
     }
 
     // Controller override methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Create instances of the gesture recognizers
         view.addGestureRecognizer(gestureDoubleTap)
-        characterImage.addGestureRecognizer(gesturePanCharacter)
-        characterImage.addGestureRecognizer(gesturePinchCharacter)
-        characterImage.addGestureRecognizer(gestureRotateCharacter)
+        characterImg.addGestureRecognizer(gesturePanCharacter)
+        characterImg.addGestureRecognizer(gesturePinchCharacter)
+        characterImg.addGestureRecognizer(gestureRotateCharacter)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -197,10 +203,11 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         return true
     }
 
+    // When the camera is shaken, change the character image
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
         if(event.subtype == UIEventSubtype.MotionShake) {
             var character = UIImage(named: "head_" + String(randomInt(1, max: characterCount)))
-            characterImage.image = character
+            characterImg.image = character
         }
     }
 
@@ -208,9 +215,8 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         super.didReceiveMemoryWarning()
     }
 
-    // Optional method implementations
-
-    // Implement gesture delegate recognizer optional function to allow the user to perform multiple gesturesx
+    // ------------------------------ Optional method implementations ------------------------------
+    // Implement gesture delegate recognizer optional function to allow the user to perform multiple gestures
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
         return true
     }

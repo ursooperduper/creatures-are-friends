@@ -14,17 +14,17 @@ let albumName = "Creatures are Friends"
 
 class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var albumFound: Bool = false            
+    var albumFound = false
     var assetCollection: PHAssetCollection!
     var photos: PHFetchResult!
-    var galleryLoaded: Bool = false
+    var galleryLoaded = false
     
-    // Button Actions
+    // ------------------------------ Button Actions ------------------------------
     @IBAction func btnCamera(sender: AnyObject) {
         // First, check to see if a camera is available
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             // Load the camera interface
-            var picker: UIImagePickerController = UIImagePickerController()
+            let picker: UIImagePickerController = UIImagePickerController()
             picker.sourceType = UIImagePickerControllerSourceType.Camera
             picker.delegate = self
             picker.allowsEditing = false
@@ -32,7 +32,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
             self.presentViewController(picker, animated: true, completion: nil)
         } else {
             // There is no camera vailable
-            var alert = UIAlertController(title: "Error", message: "There is no camera available.", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Error", message: "There is no camera available.", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(alertAction) in
                 alert.dismissViewControllerAnimated(true, completion: nil)
             }))
@@ -41,7 +41,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     }
     
     @IBAction func btnPhotoAlbum(sender: AnyObject) {
-        var picker: UIImagePickerController = UIImagePickerController()
+        let picker: UIImagePickerController = UIImagePickerController()
         picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         picker.delegate = self
         picker.allowsEditing = true
@@ -50,7 +50,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     @IBOutlet var collectionView: UICollectionView!
     
-    // View management methods
+    // ---------------------------- Controller Methods ----------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,7 +83,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         //!!Handle the case where no photos are loaded
         // Add a label that says, "No Photos", perhaps
     
-            self.collectionView.reloadData()
+        self.collectionView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,9 +100,9 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
             controller.assetCollection = self.assetCollection
         }
     }
-    
-    // The following functions are set up to instantiate the supporting types for this class
 
+
+    // ------------------------- Supporting Functions for Classes -----------------
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count: Int = 0
@@ -137,9 +137,8 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     // UIImagePickerControllerDelegate methods
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary) {
         let image = info.objectForKey(UIImagePickerControllerOriginalImage) as UIImage
-        //let editedimage = info.objectForKey(UIImagePickerControllerEditedImage) as UIImage
-//        imagePickerController.allowsEditing = YES;
-        
+        // let editedimage = info.objectForKey(UIImagePickerControllerEditedImage) as UIImage
+        // imagePickerController.allowsEditing = YES;
         
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
             let createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)

@@ -127,13 +127,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="characterImage" destination="XWz-T2-vQX" id="4tg-jy-hxf"/>
+                        <outlet property="characterImg" destination="XWz-T2-vQX" id="D4W-vi-dsY"/>
                         <outlet property="gestureDoubleTap" destination="EOm-Eh-6zT" id="fUb-Rp-IP2"/>
                         <outlet property="gesturePanCharacter" destination="klK-Be-csZ" id="s8B-iP-YdV"/>
                         <outlet property="gesturePinchCharacter" destination="bcg-Lf-5hF" id="UH7-vI-DC4"/>
                         <outlet property="gestureRotateCharacter" destination="mb6-hv-wtv" id="CVg-xH-9sr"/>
-                        <outlet property="imgView" destination="BTX-n2-WIw" id="uey-CQ-Vlr"/>
-                        <outlet property="viewImage" destination="FVL-MZ-DPk" id="Luu-EJ-HgO"/>
+                        <outlet property="imgContainer" destination="FVL-MZ-DPk" id="A4T-UF-wKH"/>
+                        <outlet property="photoImg" destination="BTX-n2-WIw" id="PAB-kR-Zas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OTj-Sl-KaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
