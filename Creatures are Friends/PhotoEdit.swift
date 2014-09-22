@@ -129,6 +129,8 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func btnExport(sender: AnyObject) {
         characterInfo["xPos"] = characterImg.frame.origin.x
         characterInfo["yPos"] = characterImg.frame.origin.y
+        characterInfo["scale"] = currScale
+        characterInfo["rotation"] = currRotation
 
         let imageToSave = getCombinedImage(self.characterImg.image!, bottomImg: self.photoImg.image!)
         addNewAssetWithImage(imageToSave, toAlbum: self.assetCollection)
@@ -165,7 +167,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func handleGesturePinchCharacter(recognizer: UIPinchGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformScale(recognizer.view!.transform, recognizer.scale, recognizer.scale)
         currScale *= recognizer.scale
-        characterInfo["scale"] = currScale
         recognizer.scale = 1
     }
 
@@ -174,7 +175,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func handleGestureRotateCharacter(recognizer: UIRotationGestureRecognizer) {
         recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
         currRotation += recognizer.rotation
-        characterInfo["rotation"] = currRotation
         recognizer.rotation = 0
     }
 
