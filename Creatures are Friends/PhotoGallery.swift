@@ -101,7 +101,6 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
         }
     }
 
-
     // ------------------------- Supporting Functions for Classes -----------------
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

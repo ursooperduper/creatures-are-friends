@@ -185,7 +185,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="jmi-8u-R7S" kind="modal" id="XH7-q7-wc8"/>
+                                    <segue destination="Vmm-kx-rSU" kind="modal" modalTransitionStyle="crossDissolve" id="tFi-pp-fny"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -194,7 +194,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4X-P2-55c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-247" y="318"/>
+            <point key="canvasLocation" x="-689" y="318"/>
+        </scene>
+        <!--Menu-->
+        <scene sceneID="rCk-Qh-aoC">
+            <objects>
+                <viewController title="Menu" id="Vmm-kx-rSU" customClass="Menu" customModule="Creatures_are_Friends" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9gc-Xj-vKN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_bg" id="Rez-KU-xLx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_camera" id="R7G-SQ-1TE">
+                                <rect key="frame" x="0.0" y="27" width="320" height="165"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_choose" id="43T-8s-wqW">
+                                <rect key="frame" x="0.0" y="205" width="320" height="165"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_view" id="Dqx-rC-H54">
+                                <rect key="frame" x="0.0" y="383" width="320" height="165"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="jmi-8u-R7S" kind="modal" identifier="menuToGallery" id="TcX-vT-lNk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3NB-7c-1ad" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-254" y="318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6xS-uY-MRW">
@@ -219,7 +263,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btn_camera" width="640" height="330"/>
+        <image name="btn_choose" width="640" height="330"/>
+        <image name="btn_view" width="640" height="330"/>
         <image name="head_1" width="300" height="300"/>
+        <image name="menu_bg" width="640" height="1136"/>
         <image name="title" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

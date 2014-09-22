@@ -54,7 +54,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         let affineFilter: CIFilter = CIFilter(name: "CIAffineTransform")
         affineFilter.setValue(fgImg, forKey: "inputImage")
         affineFilter.setValue(NSValue(CGAffineTransform: affineConcat), forKey: "inputTransform")
-        
+                
         // Grab the resulting image data
         let affineResult = affineFilter.valueForKey("outputImage") as CIImage
         
