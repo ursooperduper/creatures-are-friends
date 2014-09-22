@@ -164,10 +164,10 @@
             </objects>
             <point key="canvasLocation" x="612" y="318"/>
         </scene>
-        <!--View Controller-->
+        <!--Title-->
         <scene sceneID="Dfm-h8-3tO">
             <objects>
-                <viewController id="quj-rS-nbq" sceneMemberID="viewController">
+                <viewController title="Title" id="quj-rS-nbq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MQ4-Nw-5Gu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -214,6 +214,10 @@
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                                 </accessibility>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3Yv-Tq-rt6" appends="YES" id="yen-LZ-U9r"/>
+                                </connections>
                             </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_choose" id="43T-8s-wqW">
                                 <rect key="frame" x="0.0" y="205" width="320" height="165"/>
@@ -221,6 +225,10 @@
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                                 </accessibility>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="HXC-xM-P2y" appends="YES" id="UtS-4k-Q8o"/>
+                                </connections>
                             </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_view" id="Dqx-rC-H54">
                                 <rect key="frame" x="0.0" y="383" width="320" height="165"/>
@@ -228,15 +236,40 @@
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                                 </accessibility>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Wiv-KF-C7z" appends="YES" id="9ab-1i-l9q"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnCamera" destination="R7G-SQ-1TE" id="CRI-bW-cTy"/>
+                        <outlet property="btnChoosePic" destination="43T-8s-wqW" id="QPL-Ip-moB"/>
+                        <outlet property="btnViewCreatures" destination="Dqx-rC-H54" id="xkP-J6-TVy"/>
+                        <outlet property="gestureTapCamera" destination="3Yv-Tq-rt6" id="KCZ-dx-dwQ"/>
+                        <outlet property="gestureTapChoosePic" destination="HXC-xM-P2y" id="D6a-2B-Eb9"/>
+                        <outlet property="gestureTapViewPics" destination="Wiv-KF-C7z" id="gRp-G7-4ag"/>
                         <segue destination="jmi-8u-R7S" kind="modal" identifier="menuToGallery" id="TcX-vT-lNk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NB-7c-1ad" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="3Yv-Tq-rt6">
+                    <connections>
+                        <action selector="handleTapCamera:" destination="Vmm-kx-rSU" id="lgL-oC-d4O"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="HXC-xM-P2y">
+                    <connections>
+                        <action selector="handleTapChoosePic:" destination="Vmm-kx-rSU" id="GVt-XI-0YX"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Wiv-KF-C7z">
+                    <connections>
+                        <action selector="handleTapViewPics:" destination="Vmm-kx-rSU" id="y5H-hT-xb6"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-254" y="318"/>
         </scene>
