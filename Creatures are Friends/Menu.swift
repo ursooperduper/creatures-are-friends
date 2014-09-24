@@ -7,53 +7,76 @@
 //
 
 import UIKit
+import Photos
 
-class Menu: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class Menu: UIViewController, UINavigationControllerDelegate {
 
-    // ----------------------------- Button Actions -----------------------------
+    var doThisNext: String!
     
-    @IBOutlet var btnCamera: UIImageView!
-    @IBOutlet var btnChoosePic: UIImageView!
-    @IBOutlet var btnViewCreatures: UIImageView!
+    var albumFound = false
+    var assetCollection: PHAssetCollection!
+    var photos: PHFetchResult!
+//    var galleryLoaded = false
     
-    // ----------------------------- Gestures -----------------------------
+    @IBAction func btnCamera(sender: UIButton) {
+        println("Take a picture")
+        doThisNext = "takePicture"
+    }
     
-    @IBOutlet var gestureTapCamera: UITapGestureRecognizer!
-    @IBAction func handleTapCamera(sender: UITapGestureRecognizer) {
+    @IBAction func btnChoosePic(sender: UIButton) {
+        println("Choose a photo")
+        doThisNext = "choosePicture"
+    }
+    
+    @IBAction func btnViewPic(sender: UIButton) {
+        println("View photos")
+        doThisNext = "viewPictures"
+    }
+    
+    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            // Load the camera interface
-            let picker = UIImagePickerController()
-            picker.sourceType = UIImagePickerControllerSourceType.Camera
-            picker.delegate = self
-//            picker.allowsEditing = false
-            
-            // Show the camera interface
-            self.presentViewController(picker, animated: true, completion: nil)
-            
-        } else {
-            // There is no camera vailable
-            let alert = UIAlertController(title: "Error", message: "There is no camera available.", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(alertAction) in
-                alert.dismissViewControllerAnimated(true, completion: nil)
-            }))
-            self.presentViewController(alert, animated: true, completion: nil)
+        switch segue.identifier as String! {
+        case "takePicture":
+            let controller: PhotoEdit = segue.destinationViewController as PhotoEdit
+            controller.nextAction = doThisNext
+            controller.assetCollection = self.assetCollection
+        case "choosePicture", "viewPictures":
+            let controller: PhotoGallery = segue.destinationViewController as PhotoGallery
+            controller.nextAction = doThisNext
+            controller.assetCollection = self.assetCollection
+        default:
+            println("Preparing for a segue we're not tracking.")
         }
-    }
-    
-    @IBOutlet var gestureTapChoosePic: UITapGestureRecognizer!
-    @IBAction func handleTapChoosePic(sender: UITapGestureRecognizer) {
-        println("Choose a picture")
-    }
-    
-    @IBOutlet var gestureTapViewPics: UITapGestureRecognizer!
-    @IBAction func handleTapViewPics(sender: UITapGestureRecognizer) {
-        println("View your creatures")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnCamera.addGestureRecognizer(gestureTapCamera)
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
+        
+        // Check if the app photo folder exists. If it doesn't create it.
+        let collection = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .Any, options: fetchOptions)
+        
+        if collection.firstObject != nil {
+            // Found the album
+            self.albumFound = true
+            self.assetCollection = collection.firstObject as PHAssetCollection
+        } else {
+            // Create the folder
+            NSLog("\nFolder\"%@\" does not exist.\nCreating now...", albumName)
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+                let request = PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle(albumName)
+                }, completionHandler: {(success, error) in
+                    NSLog("Creation of folder -> %@", success ? "Success" : "Error")
+                    self.albumFound = success ? true : false
+            })
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBarHidden = true
+        navigationController?.toolbarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,15 +84,5 @@ class Menu: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
         // Dispose of any resources that can be recreated.
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        
-        println("User wants to save the photo")
-        
-        let imageToSave: UIImage = info[UIImagePickerControllerOriginalImage] as UIImage
-        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
-        
-        
-        // Instead of this, transition to the Photo Edit view with the photo taken in the editor
-        picker.dismissViewControllerAnimated(true, completion: nil)
-    }
+
 }

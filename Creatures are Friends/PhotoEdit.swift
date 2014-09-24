@@ -11,7 +11,7 @@ import Photos
 import CoreImage
 import CoreGraphics
 
-class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
+class PhotoEdit: UIViewController, UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     // Number of character images in the library
     let characterCount = 20
@@ -26,11 +26,31 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
     var currScale: CGFloat = 1
     var currRotation: CGFloat = 0
     var characterPos: CGPoint = CGPointZero
+    
+    var nextAction: String!
+    var imageToEdit: UIImage!
 
     @IBOutlet var imgContainer: UIView! // The View that contains the photo and character
     @IBOutlet var photoImg: UIImageView! // The main photo
     @IBOutlet var characterImg: UIImageView! // The character head
 
+    
+    func openCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let picker = UIImagePickerController()
+            picker.sourceType = UIImagePickerControllerSourceType.Camera
+            picker.delegate = self
+            self.presentViewController(picker, animated: true, completion: nil)
+        } else {
+            // There is no camera available
+            let alert = UIAlertController(title: "Error", message: "There is no camera available.", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(alertAction) in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     // Creates a new photo out of the combined character and photo images
     func getCombinedImage(topImg: UIImage, bottomImg: UIImage) -> UIImage {
         
@@ -90,14 +110,18 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
 
     // Retrieves an image using PHImageManager, the target size is of the screen dimensions.
     func displayPhoto() {
-        let imageManager = PHImageManager.defaultManager()
-        let optionsForImage = PHImageRequestOptions()
-        optionsForImage.resizeMode = .Exact
-        optionsForImage.synchronous = true
-        
-        let id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: imgContainer.bounds.width, height: imgContainer.bounds.height), contentMode: .AspectFill, options: optionsForImage, resultHandler: {(result, info) in
-            self.photoImg.image = result
-        })
+        if nextAction == "takePicture" {
+            self.photoImg.image = imageToEdit
+        } else {
+            let imageManager = PHImageManager.defaultManager()
+            let optionsForImage = PHImageRequestOptions()
+            optionsForImage.resizeMode = .Exact
+            optionsForImage.synchronous = true
+            
+            let id = imageManager.requestImageForAsset(self.photos[self.index] as PHAsset, targetSize: CGSize(width: imgContainer.bounds.width, height: imgContainer.bounds.height), contentMode: .AspectFill, options: optionsForImage, resultHandler: {(result, info) in
+                self.photoImg.image = result
+            })
+        }
     }
 
     // Adds the new photo to the Creatures are Friends library
@@ -118,7 +142,6 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         })
     }
 
-    // ------------------------------ Button Actions ------------------------------
     
     // Cancel button
     @IBAction func btnCancel(sender: AnyObject) {
@@ -138,7 +161,7 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 
-    // ** GESTURES **
+
     // Gesture: Double Tap
     @IBOutlet var gestureDoubleTap: UITapGestureRecognizer!
     @IBAction func handleGestureDoubleTap(recognizer: UITapGestureRecognizer) {
@@ -186,11 +209,34 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         characterImg.addGestureRecognizer(gesturePanCharacter)
         characterImg.addGestureRecognizer(gesturePinchCharacter)
         characterImg.addGestureRecognizer(gestureRotateCharacter)
+        
+        navigationController?.navigationBarHidden = false
+        navigationController?.toolbarHidden = false
+        
+        println("in viewDidLoad(), the next action is \(nextAction)")
+        
+        switch nextAction {
+            case "takePicture":
+                openCamera()
+            case "choosePhoto":
+                displayPhoto()
+            case "viewPhotos":
+                displayPhoto()
+        default:
+           println("loading a case we're not expecting in the Edit controller.")
+        }
+        
+//        if nextAction == "takePicture" {
+//            openCamera()
+//        }
     }
 
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setToolbarHidden(false, animated: false)
-        self.displayPhoto()
+        
+        if nextAction != "takePicture" {
+            self.displayPhoto()
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -215,9 +261,18 @@ class PhotoEdit: UIViewController, UIGestureRecognizerDelegate {
         super.didReceiveMemoryWarning()
     }
 
-    // ------------------------------ Optional method implementations ------------------------------
     // Implement gesture delegate recognizer optional function to allow the user to perform multiple gestures
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
         return true
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        imageToEdit = info[UIImagePickerControllerOriginalImage] as UIImage
+        //        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        displayPhoto()
     }
 }

@@ -18,8 +18,8 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     var assetCollection: PHAssetCollection!
     var photos: PHFetchResult!
     var galleryLoaded = false
+    var nextAction: String!
     
-    // ------------------------------ Button Actions ------------------------------
     @IBAction func btnCamera(sender: AnyObject) {
         // First, check to see if a camera is available
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
@@ -50,30 +50,10 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     @IBOutlet var collectionView: UICollectionView!
     
-    // ---------------------------- Controller Methods ----------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
-        
-        // Check if the app photo folder exists. If it doesn't create it.
-        let collection = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .Any, options: fetchOptions)
-        
-        if collection.firstObject != nil {
-            // Found the album
-            self.albumFound = true
-            self.assetCollection = collection.firstObject as PHAssetCollection
-        } else {
-            // Create the folder
-            NSLog("\nFolder\"%@\" does not exist.\nCreating now...", albumName)
-            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-                let request = PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle(albumName)
-                }, completionHandler: {(success, error) in
-                    NSLog("Creation of folder -> %@", success ? "Success" : "Error")
-                    self.albumFound = success ? true : false
-            })
-        }
+        navigationController?.navigationBarHidden = false
+        navigationController?.toolbarHidden = false
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -98,10 +78,10 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
             controller.index = indexPath.item
             controller.photos = self.photos
             controller.assetCollection = self.assetCollection
+            controller.nextAction = nextAction
         }
     }
 
-    // ------------------------- Supporting Functions for Classes -----------------
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count: Int = 0
@@ -137,7 +117,7 @@ class PhotoGallery: UIViewController, UICollectionViewDataSource, UICollectionVi
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary) {
         let image = info.objectForKey(UIImagePickerControllerOriginalImage) as UIImage
         // let editedimage = info.objectForKey(UIImagePickerControllerEditedImage) as UIImage
-        // imagePickerController.allowsEditing = YES;
+//        imagePickerController.allowsEditing = true;
         
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
             let createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
